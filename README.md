@@ -1,6 +1,6 @@
 # TinyTrim
 
-A set of CSS generic classes for on-the-fly adjustment of elements without having to add a long style list like jut to adjust an element like:
+A set of CSS generic classes for on-the-fly adjustment of elements without having to add a long style list every time you need to adjust an element like:
 
     style="lots-of-stuff: #ugh;"
 
