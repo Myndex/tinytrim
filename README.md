@@ -30,7 +30,7 @@ The light backgrounds are for a background for text, including body text. The cl
 
 Thus **PbgB** is the lightest (pastel) of blue as background-color
 
-![](images/inyTrimBackgrounds.png)
+![](images/TinyTrimBackgrounds.png)
 
 
 ### Luv Colors
