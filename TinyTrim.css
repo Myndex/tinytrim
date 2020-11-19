@@ -27,131 +27,131 @@
 /* ************************************************************************** */
 
 
-	/* ********************************* */
-	/********	REFERENCE GUIDE	  ********/
-	/* ********************************* */
+    /* ********************************* */
+    /********   REFERENCE GUIDE   ********/
+    /* ********************************* */
 
 /*
-    ******	FIRST LETTER: ******
+    ******  FIRST LETTER: ******
 
 ****** a '0' indicates a number is required *******
 
-.a .un	all:
-.al		align, alias for text-align (ta)
-.d .ds 	display: (see display section)
+.a .un  all:
+.al     align, alias for text-align (ta)
+.d .ds  display: (see display section)
 
-.fl		float
-.c .cl	clear
+.fl     float
+.c .cl  clear
 
-.w0	    width
-.h0	    height
+.w0     width
+.h0     height
 
 ///// Not implemented yet 
-.mnw0	min-width
-.mnh0	min-height
-.mxw0	max-width
-.mxh0	max-height
+.mnw0   min-width
+.mnh0   min-height
+.mxw0   max-width
+.mxh0   max-height
 /////////////////////////
 
-.m0	    margin
-.ma0	margin set vertical numeric and auto for horizontal
+.m0     margin
+.ma0    margin set vertical numeric and auto for horizontal
 
 .mt0 .mr0 .mb0 .ml0  top right bottom left
 
-.p0 	padding
+.p0     padding
 
 .pt0 .pr0 .pb0 .pl0  top right bottom left
 
 .po     position settings (abs, rel etc)
-.po0	position adjust
+.po0    position adjust
 
 .pot0 .por0 .pob0 .pol0  top right bottom left
 
-.z0	z-index
+.z0 z-index
 
-.b0	border
+.b0 border
 //// NOT IMPLEMENTED: .bt0 .br0 .bb0 .bl0  top right bottom left ////
 
-.br0	border radius
+.br0    border radius
 
-.f		font
-.ff		font-family
-.fs0	font-size (.fs no numeric is font style)
-.fw0	font-weight
-.ft	or .fs	font-style
-.fd or .td	text-decoration (font decoration is an alias) aka underline
+.f      font
+.ff     font-family
+.fs0    font-size (.fs no numeric is font style)
+.fw0    font-weight
+.ft or .fs  font-style
+.fd or .td  text-decoration (font decoration is an alias) aka underline
 
-.bs		box-shadow
-.bsi	inset box-shadow
-.ts		text-shadow
+.bs     box-shadow
+.bsi    inset box-shadow
+.ts     text-shadow
 
-.tt		text-transform
-.t or .ta	text-align
-.tl		text-align-last
-.ti		text-indent
+.tt     text-transform
+.t or .ta   text-align
+.tl     text-align-last
+.ti     text-indent
 
-.v		visibility or vertical align
-.va		vertical align for initial, inherit, others as alias
-.ws		white-space
+.v      visibility or vertical align
+.va     vertical align for initial, inherit, others as alias
+.ws     white-space
 
-.o		overflow
-.to		text overflow
+.o      overflow
+.to     text overflow
 
 
       ****** 2ND/3RD LETTER: ******
 
 ****** depends on context, all contexts shown together ******
 
-	i	initial
-	h	inherit
+    i   initial
+    h   inherit
 
-	a	auto, absolute
-	o	oblique
-	it	italic
-	
-	NoLetter: normal
-	
-	b	both, bold
-	b   (when after numbers): bottom	
-	
-	br  bolder
-	lr	lighter
-	
-	l   light, lowercase, length
-	l   (when after numbers): left
-	
-	r	relative
-	r   (when after numbers): right
-	
-	j	justify (.tj, .taj, .tlj)
-	c	center, capitalize, clip
+    a   auto, absolute
+    o   oblique
+    it  italic
+    
+    NoLetter: normal
+    
+    b   both, bold
+    b   (when after numbers): bottom    
+    
+    br  bolder
+    lr  lighter
+    
+    l   light, lowercase, length
+    l   (when after numbers): left
+    
+    r   relative
+    r   (when after numbers): right
+    
+    j   justify (.tj, .taj, .tlj)
+    c   center, capitalize, clip
 
-	s	scroll, string, start
-	e	end
-	t	top (when after numbers)
-	xt	text-top
-	m	middle
-	b	bottom (when after numbers)
-	xb	text-bottom
+    s   scroll, string, start
+    e   end
+    t   top (when after numbers)
+    xt  text-top
+    m   middle
+    b   bottom (when after numbers)
+    xb  text-bottom
 
-	p	pre
-	pl	pre-line
-	pw	pre-wrap
+    p   pre
+    pl  pre-line
+    pw  pre-wrap
 
-	bl	baseline
-	n	none, hidden, nowrap
-	h	hidden, also hid and hi
-	v	visible also vis
-	u	unset or uppercase
+    bl  baseline
+    n   none, hidden, nowrap
+    h   hidden, also hid and hi
+    v   visible also vis
+    u   unset or uppercase
 
-	NO 2ND/3RD LETTER: 	'normal'
+    NO 2ND/3RD LETTER:  'normal'
 
-	LAST LETTER, AFTER NUMBERS
+    LAST LETTER, AFTER NUMBERS
 
-	p	px
-	r	rem
-	nothing: em or unitless
-	
+    p   px
+    r   rem
+    nothing: em or unitless
+    
 ****************************** */
 
 /* *****   CONFLICT ISSUES
@@ -159,7 +159,7 @@
 */
 
 
-/* **** 	TO DO   ****
+/* ****     TO DO   ****
 
 Add vmin vw and vh for certain properties
 
@@ -184,25 +184,25 @@ cursor: value;
 
 General guidelines
 
-	.d or .ds display
-	b block
-	c content, cell (tc), or container (ruby)
-	f flow
-	fr flow-root
-	fx flex
-	g grid or group
-	i inline
-	ib inline-block
-	ih inherit
-	it initial
-	l list-item
-	m column
-	n, no  = none
-	p caption
-	r ruby or row or run-in
-	rb ruby base
-	rt ruby text
-	ry ruby
+    .d or .ds display
+    b block
+    c content, cell (tc), or container (ruby)
+    f flow
+    fr flow-root
+    fx flex
+    g grid or group
+    i inline
+    ib inline-block
+    ih inherit
+    it initial
+    l list-item
+    m column
+    n, no  = none
+    p caption
+    r ruby or row or run-in
+    rb ruby base
+    rt ruby text
+    ry ruby
 
 ********************************/
 
@@ -211,12 +211,12 @@ General guidelines
 /**************************************************/
 
 /**** ds global values  ****/
-.dsi	{ display: initial; }
-.dsh	{ display: inherit; }
-.dsu	{ display: unset; }
+.dsi    { display: initial; }
+.dsh    { display: inherit; }
+.dsu    { display: unset; }
 
 /**** d  display-box values  ****/
-.dc 	{ display: contents; }
+.dc     { display: contents; }
 
 .dn, body .dn, body main .dn,
 body main div.dn, body main div .dn { display: none; }
@@ -230,8 +230,8 @@ body main div.db, body main div .db { display: block; }
 /* db specificity adds to help provide override */
 
 
-.di		{ display: inline; }
-.dr		{ display: run-in; }
+.di     { display: inline; }
+.dr     { display: run-in; }
 
 /**** d  display-legacy values  ****/
 
@@ -240,48 +240,48 @@ body main div.dib, body main div .dib { display: inline-block; }
 /* dib specificity adds to help provide override */
 
 
-.dif	{ display: inline-flex; }
-.dig	{ display: inline-grid; }
-.dit	{ display: inline-table; }
+.dif    { display: inline-flex; }
+.dig    { display: inline-grid; }
+.dit    { display: inline-table; }
 
 /**** d  display-inside values  ****/
-.df		{ display: flow; }
-.dfr	{ display: flow-root; }
-.dt		{ display: table; }
-.dfx	{ display: flex; }
-.dg		{ display: grid; }
-.dry	{ display: ruby; }
+.df     { display: flow; }
+.dfr    { display: flow-root; }
+.dt     { display: table; }
+.dfx    { display: flex; }
+.dg     { display: grid; }
+.dry    { display: ruby; }
 
 /**** ds  display-outside  plus  display-inside  values  ****/
-.dsbf	{ display: block flow; }
-.dsit	{ display: inline table; }
-.dfxr	{ display: flex run-in; }
+.dsbf   { display: block flow; }
+.dsit   { display: inline table; }
+.dfxr   { display: flex run-in; }
 
 /**** dl  display-list-item  values  ****/
-.dl		{ display: list-item; }
-.dlb	{ display: list-item block; }
-.dli	{ display: list-item inline; }
-.dlf	{ display: list-item flow; }
-.dlfr	{ display: list-item flow-root; }
-.dlbf	{ display: list-item block flow; }
-.dlbfr	{ display: list-item block flow-root; }
+.dl     { display: list-item; }
+.dlb    { display: list-item block; }
+.dli    { display: list-item inline; }
+.dlf    { display: list-item flow; }
+.dlfr   { display: list-item flow-root; }
+.dlbf   { display: list-item block flow; }
+.dlbfr  { display: list-item block flow-root; }
 
-.dflb	{ display: flow list-item block; }
+.dflb   { display: flow list-item block; }
 
 /**** dt  display-internal  values  ****/
-.dtrg	{ display: table-row-group; }
-.dthg	{ display: table-header-group; }
-.dtfg	{ display: table-footer-group; }
-.dtr	{ display: table-row; }
-.dtc	{ display: table-cell; }
-.dtmg	{ display: table-column-group; }
-.dtm	{ display: table-column; }
-.dtp	{ display: table-caption; }
+.dtrg   { display: table-row-group; }
+.dthg   { display: table-header-group; }
+.dtfg   { display: table-footer-group; }
+.dtr    { display: table-row; }
+.dtc    { display: table-cell; }
+.dtmg   { display: table-column-group; }
+.dtm    { display: table-column; }
+.dtp    { display: table-caption; }
 
-.drb	{ display: ruby-base; }
-.drt	{ display: ruby-text; }
-.drbc	{ display: ruby-base-container; }
-.drtc	{ display: ruby-text-container; }
+.drb    { display: ruby-base; }
+.drt    { display: ruby-text; }
+.drbc   { display: ruby-base-container; }
+.drtc   { display: ruby-text-container; }
 
 
 
@@ -310,13 +310,13 @@ body main div.dib, body main div .dib { display: inline-block; }
 .toc {text-overflow: clip;}
 .toe {text-overflow: ellipsis;}
 
-.wsi 	{white-space: initial;}
-.wsh 	{white-space: inherit;}
-.ws 	{white-space: normal;}
-.wsn	{white-space: nowrap;}
-.wsp 	{white-space: pre;}
-.wspl	{white-space: pre-line;}
-.wspw 	{white-space: pre-wrap;}
+.wsi    {white-space: initial;}
+.wsh    {white-space: inherit;}
+.ws     {white-space: normal;}
+.wsn    {white-space: nowrap;}
+.wsp    {white-space: pre;}
+.wspl   {white-space: pre-line;}
+.wspw   {white-space: pre-wrap;}
 
 
 /**************************************************/
@@ -324,17 +324,17 @@ body main div.dib, body main div .dib { display: inline-block; }
 /**************************************************/
 
 .aa {
-	-webkit-font-smoothing: auto;
-	-moz-osx-font-smoothing: auto;
-	font-smooth: auto;
-	}
+    -webkit-font-smoothing: auto;
+    -moz-osx-font-smoothing: auto;
+    font-smooth: auto;
+    }
 
 /* The below should not be used on readable text */
 .aaa {
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	font-smooth: always;
-	}
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smooth: always;
+    }
 
 
 /******************************************/
@@ -541,18 +541,18 @@ body main div.dib, body main div .dib { display: inline-block; }
 
 /****   positions  .po  ( .pa, .pr, conflict with padding) ****/
 
-.pi, .poi	{ position: initial; }
-.ph, .poh	{ position: inherit; }
+.pi, .poi   { position: initial; }
+.ph, .poh   { position: inherit; }
 
-.psc,.posc	{ position: static; }
+.psc,.posc  { position: static; }
 
 .por, body .por, body main .por,
 body main div.por, body main div .por
 { position: relative;} /* specificity added to help provide override */
 
-.poa	{ position: absolute; }
-.psy, .posy	{ position: -webkit-sticky; position: sticky; }
-.pf, .pof	{ position: fixed; }
+.poa    { position: absolute; }
+.psy, .posy { position: -webkit-sticky; position: sticky; }
+.pf, .pof   { position: fixed; }
 
 
 /**** fl  floats   ****/
@@ -580,15 +580,15 @@ body main div.por, body main div .por
 /* Usage:  <div class="clf"></div>  */
 
 .clf:before, .clf:after
-	{
+    {
     content: " "; /* 1 */
     display: table; /* 2 */
-	}
+    }
 
 .clf:after { clear: both; }
 
-/****	For IE 6/7 only
-		Include this rule to trigger hasLayout and contain floats.
+/****   For IE 6/7 only
+        Include this rule to trigger hasLayout and contain floats.
 ****/
 .clf {*zoom: 1;}
 
@@ -1462,8 +1462,8 @@ body main div.por, body main div .por
 
 /****  f  font  ****/
 
-.fi	{ font: initial; }
-.fh	{ font: inherit; }
+.fi { font: initial; }
+.fh { font: inherit; }
 
 
 /********************************************************************/
@@ -1531,8 +1531,8 @@ body main div.por, body main div .por
 
 /****  FONT SIZE  ****/
 
-.fsi	{ font-size: initial; }
-.fsh	{ font-size: inherit; }
+.fsi    { font-size: initial; }
+.fsh    { font-size: inherit; }
 
 /****  fs__r Font size in rem  ****/
 
@@ -1675,14 +1675,14 @@ body main div.por, body main div .por
 
 .fw1 {font-weight: 100;}
 .fw2, .fwl, .light {
-	  font-weight: 200;}
+      font-weight: 200;}
 .fw3 {font-weight: 300;}
 .fw4, .fw, .fwn, .normal {
-	  font-weight: 400;}
+      font-weight: 400;}
 .fw5 {font-weight: 500;}
 .fw6 {font-weight: 600;}
 .fw7, .fwb, .bold {
-	  font-weight: 700;}
+      font-weight: 700;}
 .fw8 {font-weight: 800;}
 .fw9 {font-weight: 900;}
 
@@ -1696,21 +1696,21 @@ body main div.por, body main div .por
 .fth, .fsh {font-style: inherit;}
 .ftu, .fsu {font-style: unset;}
 
-.fto, .fso		  {font-style: oblique;}
-.ftit, .fsit	  {font-style: italic;}
+.fto, .fso        {font-style: oblique;}
+.ftit, .fsit      {font-style: italic;}
 .ft, .ftn, .normal {font-style: normal;}
 
 
 /****  fdx or tdx text-line decorations  ****/
 
-.fdi, .tdi 	{text-decoration: initial;}
-.fdh, .tdh 	{text-decoration: inherit;}
+.fdi, .tdi  {text-decoration: initial;}
+.fdh, .tdh  {text-decoration: inherit;}
 
-.fdo, .tdo 	{text-decoration: overline;}
-.fdu, .tdu 	{text-decoration: underline;}
+.fdo, .tdo  {text-decoration: overline;}
+.fdu, .tdu  {text-decoration: underline;}
 
 .fdt, .tdt,
-.fst, .tst	{text-decoration: line-through;}
+.fst, .tst  {text-decoration: line-through;}
 
 .fdn, .tdn, .normal {text-decoration: none;}
 
@@ -1722,56 +1722,56 @@ body main div.por, body main div .por
 
 /****  ls  letterspacing   ****/
 
-.lsi 		{letter-spacing: initial;}
+.lsi        {letter-spacing: initial;}
 .lsi:hover  {letter-spacing: initial;}
 .lsi:active {letter-spacing: initial;}
 
-.lsh 		{letter-spacing: inherit;}
+.lsh        {letter-spacing: inherit;}
 .lsh:hover  {letter-spacing: inherit;}
 .lsh:active {letter-spacing: inherit;}
 
 .ls00, .ls0, .ls, .normal, .ls00 a, .ls0 a, .ls a, .normal a, a.ls00, a.ls0, a.ls, a.normal
-	{letter-spacing: normal;}
+    {letter-spacing: normal;}
 .ls00 a:hover, .ls0 a:hover, .ls a:hover, .normal a:hover, a.ls00:hover, a.ls0:hover, a.ls:hover, a.normal:hover
-	{letter-spacing: normal;}
+    {letter-spacing: normal;}
 .ls00 a:active, .ls0 a:active, .ls a:active, .normal a:active, a.ls00:active, a.ls0:active, a.ls:active, a.normal:active
-	{letter-spacing: normal;}
+    {letter-spacing: normal;}
 
-.ls1,  .ls01, a.ls1,  a.ls01,.ls1 a,  		.ls01 a 		{letter-spacing: 0.01em}
-a.ls1:hover,  a.ls01:hover,  .ls1 a:hover,  .ls01 a:hover 	{letter-spacing: 0.01em}
-a.ls1:active, a.ls01:active, .ls1 a:active, .ls01 a:active	{letter-spacing: 0.01em}
+.ls1,  .ls01, a.ls1,  a.ls01,.ls1 a,        .ls01 a         {letter-spacing: 0.01em}
+a.ls1:hover,  a.ls01:hover,  .ls1 a:hover,  .ls01 a:hover   {letter-spacing: 0.01em}
+a.ls1:active, a.ls01:active, .ls1 a:active, .ls01 a:active  {letter-spacing: 0.01em}
 
-.ls2,  .ls02, a.ls2,  a.ls02,.ls2 a,  		.ls02 a			{letter-spacing: 0.02em}
-a.ls2:hover,  a.ls02:hover,  .ls2 a:hover,  .ls02 a:hover 	{letter-spacing: 0.02em}
-a.ls2:active, a.ls02:active, .ls2 a:active, .ls02 a:active	{letter-spacing: 0.02em}
+.ls2,  .ls02, a.ls2,  a.ls02,.ls2 a,        .ls02 a         {letter-spacing: 0.02em}
+a.ls2:hover,  a.ls02:hover,  .ls2 a:hover,  .ls02 a:hover   {letter-spacing: 0.02em}
+a.ls2:active, a.ls02:active, .ls2 a:active, .ls02 a:active  {letter-spacing: 0.02em}
 
-.ls3,  .ls03, a.ls3,  a.ls03,.ls3 a, 		.ls03 a 		{letter-spacing: 0.03em}
-a.ls3:hover,  a.ls03:hover,  .ls3 a:hover,  .ls03 a:hover 	{letter-spacing: 0.03em}
-a.ls3:active, a.ls03:active, .ls3 a:active, .ls03 a:active	{letter-spacing: 0.03em}
+.ls3,  .ls03, a.ls3,  a.ls03,.ls3 a,        .ls03 a         {letter-spacing: 0.03em}
+a.ls3:hover,  a.ls03:hover,  .ls3 a:hover,  .ls03 a:hover   {letter-spacing: 0.03em}
+a.ls3:active, a.ls03:active, .ls3 a:active, .ls03 a:active  {letter-spacing: 0.03em}
 
-.ls4,  .ls04, a.ls4,  a.ls04,.ls4 a,  		.ls04 a 		{letter-spacing: 0.04em}
-a.ls4:hover,  a.ls04:hover,  .ls4 a:hover,  .ls04 a:hover 	{letter-spacing: 0.04em}
-a.ls4:active, a.ls04:active, .ls4 a:active, .ls04 a:active	{letter-spacing: 0.04em}
+.ls4,  .ls04, a.ls4,  a.ls04,.ls4 a,        .ls04 a         {letter-spacing: 0.04em}
+a.ls4:hover,  a.ls04:hover,  .ls4 a:hover,  .ls04 a:hover   {letter-spacing: 0.04em}
+a.ls4:active, a.ls04:active, .ls4 a:active, .ls04 a:active  {letter-spacing: 0.04em}
 
-.ls5,  .ls05, a.ls5,  a.ls05,.ls5 a,  		.ls05 a 		{letter-spacing: 0.05em}
-a.ls5:hover,  a.ls05:hover,  .ls5 a:hover,  .ls05 a:hover 	{letter-spacing: 0.05em}
-a.ls5:active, a.ls05:active, .ls5 a:active, .ls05 a:active	{letter-spacing: 0.05em}
+.ls5,  .ls05, a.ls5,  a.ls05,.ls5 a,        .ls05 a         {letter-spacing: 0.05em}
+a.ls5:hover,  a.ls05:hover,  .ls5 a:hover,  .ls05 a:hover   {letter-spacing: 0.05em}
+a.ls5:active, a.ls05:active, .ls5 a:active, .ls05 a:active  {letter-spacing: 0.05em}
 
-.ls10, a.ls10, .ls10 a			{letter-spacing: 0.10em}
-a.ls10:hover,  .ls10 a:hover	{letter-spacing: 0.10em}
-a.ls10:active, .ls10 a:active	{letter-spacing: 0.10em}
+.ls10, a.ls10, .ls10 a          {letter-spacing: 0.10em}
+a.ls10:hover,  .ls10 a:hover    {letter-spacing: 0.10em}
+a.ls10:active, .ls10 a:active   {letter-spacing: 0.10em}
 
-.ls15, a.ls15, .ls15 a			{letter-spacing: 0.15em}
-a.ls15:hover,  .ls15 a:hover	{letter-spacing: 0.15em}
-a.ls15:active, .ls15 a:active	{letter-spacing: 0.15em}
+.ls15, a.ls15, .ls15 a          {letter-spacing: 0.15em}
+a.ls15:hover,  .ls15 a:hover    {letter-spacing: 0.15em}
+a.ls15:active, .ls15 a:active   {letter-spacing: 0.15em}
 
-.ls20, a.ls20, .ls20 a			{letter-spacing: 0.20em}
-a.ls20:hover,  .ls20 a:hover	{letter-spacing: 0.20em}
-a.ls20:active, .ls20 a:active	{letter-spacing: 0.20em}
+.ls20, a.ls20, .ls20 a          {letter-spacing: 0.20em}
+a.ls20:hover,  .ls20 a:hover    {letter-spacing: 0.20em}
+a.ls20:active, .ls20 a:active   {letter-spacing: 0.20em}
 
-.ls25, a.ls25, .ls25 a			{letter-spacing: 0.25em}
-a.ls25:hover,  .ls25 a:hover	{letter-spacing: 0.25em}
-a.ls25:active, .ls25 a:active	{letter-spacing: 0.25em}
+.ls25, a.ls25, .ls25 a          {letter-spacing: 0.25em}
+a.ls25:hover,  .ls25 a:hover    {letter-spacing: 0.25em}
+a.ls25:active, .ls25 a:active   {letter-spacing: 0.25em}
 
 
 /****  lh  line height   ****/
@@ -2040,81 +2040,81 @@ a.ls25:active, .ls25 a:active	{letter-spacing: 0.25em}
 
 /* HTML Named Colors */
 
-.cBlk, .cBk, .cBlack		{ color: Black;}
-.bgBlk, .bgBk, .bgBlack		{ background-color: Black;}
-.bcBlk, .bcBk, .bcBlack		{ border-color: Black;}
+.cBlk, .cBk, .cBlack        { color: Black;}
+.bgBlk, .bgBk, .bgBlack     { background-color: Black;}
+.bcBlk, .bcBk, .bcBlack     { border-color: Black;}
 
-.cBrn, .cBn, .cBrown		{ color: #840;}
-.bgBrn, .bgBn, .bgBrown		{ background-color: #840;}
-.bcBrn, .bcBn, .bcBrown		{ border-color: #840;}
+.cBrn, .cBn, .cBrown        { color: #840;}
+.bgBrn, .bgBn, .bgBrown     { background-color: #840;}
+.bcBrn, .bcBn, .bcBrown     { border-color: #840;}
 
-.cNvy, .cN, .cNavy			{ color: Navy;}
-.bgNvy, .bgN, .bgNavy		{ background-color: Navy;}
-.bcNvy, .bcN, .bcNavy		{ border-color: Navy;}
+.cNvy, .cN, .cNavy          { color: Navy;}
+.bgNvy, .bgN, .bgNavy       { background-color: Navy;}
+.bcNvy, .bcN, .bcNavy       { border-color: Navy;}
 
-.cBlu, .cB, .cBlue			{ color: Blue;}
-.bgBlu, .bgB, .bgBlue		{ background-color: Blue;}
-.bcBlu, .bcB, .bcBlue		{ border-color: Blue;}
+.cBlu, .cB, .cBlue          { color: Blue;}
+.bgBlu, .bgB, .bgBlue       { background-color: Blue;}
+.bcBlu, .bcB, .bcBlue       { border-color: Blue;}
 
-.cYlw, .cY, .cYellow		{ color: Yellow;}
-.bgYlw, .bgY, .bgYellow		{ background-color: Yellow;}
-.bcYlw, .bcY, .bcYellow		{ border-color: Yellow;}
+.cYlw, .cY, .cYellow        { color: Yellow;}
+.bgYlw, .bgY, .bgYellow     { background-color: Yellow;}
+.bcYlw, .bcY, .bcYellow     { border-color: Yellow;}
 
-.cRed, .cR, .cRR			{ color: Red;}
-.bgRed, .bgR, .bgRR			{ background-color: Red;}
-.bcRed, .bcR, .bcRR			{ border-color: Red;}
+.cRed, .cR, .cRR            { color: Red;}
+.bgRed, .bgR, .bgRR         { background-color: Red;}
+.bcRed, .bcR, .bcRR         { border-color: Red;}
 
-.cOrg, .cO, .cOrange		{ color: #F80;}
-.bgOrg, .bgO, .bgOrange		{ background-color: #F80;}
-.bcOrg, .bcO, .bcOrange		{ border-color: #F80;}
+.cOrg, .cO, .cOrange        { color: #F80;}
+.bgOrg, .bgO, .bgOrange     { background-color: #F80;}
+.bcOrg, .bcO, .bcOrange     { border-color: #F80;}
 
-.cTan, .cTn, .cTt			{ color: #CA0;}
-.bgTan, .bgTn, .bgTt		{ background-color: #CA0;}
-.bcTan, .bcTn, .bcTt		{ border-color: #CA0;}
+.cTan, .cTn, .cTt           { color: #CA0;}
+.bgTan, .bgTn, .bgTt        { background-color: #CA0;}
+.bcTan, .bcTn, .bcTt        { border-color: #CA0;}
 
-.cMrn, .cMn, .cMaroon		{ color: Maroon;}
-.bgMrn, .bgMn, .bgMaroon	{ background-color: Maroon;}
-.bcMrn, .bcMn, .bcMaroon	{ border-color: Maroon;}
+.cMrn, .cMn, .cMaroon       { color: Maroon;}
+.bgMrn, .bgMn, .bgMaroon    { background-color: Maroon;}
+.bcMrn, .bcMn, .bcMaroon    { border-color: Maroon;}
 
-.cPur, .cP, .cPurple		{ color: Purple;}
-.bgPur, .bgP, .bgPurple		{ background-color: Purple;}
-.bcPur, .bcP, .bcPurple		{ border-color: Purple;}
+.cPur, .cP, .cPurple        { color: Purple;}
+.bgPur, .bgP, .bgPurple     { background-color: Purple;}
+.bcPur, .bcP, .bcPurple     { border-color: Purple;}
 
-.cMag, .cMagenta, .cM, .cFsh, .cF, .cFuchsia		{ color: Fuchsia;}
-.bgMag, .bgMagenta, .bgM, .bgFsh, .bgF, .bgFuchsia	{ background-color: Fuchsia;}
-.bcMag, .bcMagenta, .bcM, .bcFsh, .bcF, .bcFuchsia	{ border-color: Fuchsia;}
+.cMag, .cMagenta, .cM, .cFsh, .cF, .cFuchsia        { color: Fuchsia;}
+.bgMag, .bgMagenta, .bgM, .bgFsh, .bgF, .bgFuchsia  { background-color: Fuchsia;}
+.bcMag, .bcMagenta, .bcM, .bcFsh, .bcF, .bcFuchsia  { border-color: Fuchsia;}
 
-.cOlv, .cOv, .cOlive		{ color: Olive;}
-.bgOlv, .bgOv, .bgOlive		{ background-color: Olive;}
-.bcOlv, .bcOv, .bcOlive		{ border-color: Olive;}
+.cOlv, .cOv, .cOlive        { color: Olive;}
+.bgOlv, .bgOv, .bgOlive     { background-color: Olive;}
+.bcOlv, .bcOv, .bcOlive     { border-color: Olive;}
 
-.cGrn, .cG, .cGreen			{ color: Green;}
-.bgGrn, .bgG, .bgGreen		{ background-color: Green;}
-.bcGrn, .bcG, .bcGreen		{ border-color: Green;}
+.cGrn, .cG, .cGreen         { color: Green;}
+.bgGrn, .bgG, .bgGreen      { background-color: Green;}
+.bcGrn, .bcG, .bcGreen      { border-color: Green;}
 
-.cTea, .cT, .cTeal			{ color: Teal;}
-.bgTea, .bgT, .bgTeal		{ background-color: Teal;}
-.bcTea, .bcT, .bcTeal		{ border-color: Teal;}
+.cTea, .cT, .cTeal          { color: Teal;}
+.bgTea, .bgT, .bgTeal       { background-color: Teal;}
+.bcTea, .bcT, .bcTeal       { border-color: Teal;}
 
-.cLim, .cL, .cLime			{ color: Lime;}
-.bgLim, .bgL, .bgLime		{ background-color: Lime;}
-.bcLim, .bcL, .bcLime		{ border-color: Lime;}
+.cLim, .cL, .cLime          { color: Lime;}
+.bgLim, .bgL, .bgLime       { background-color: Lime;}
+.bcLim, .bcL, .bcLime       { border-color: Lime;}
 
-.cAqu, .cA, .cAqua			{ color: Aqua;}
-.bgAqu, .bgA, .bgAqua		{ background-color: Aqua;}
-.bcAqu, .bcA, .bcAqua		{ border-color: Aqua;}
+.cAqu, .cA, .cAqua          { color: Aqua;}
+.bgAqu, .bgA, .bgAqua       { background-color: Aqua;}
+.bcAqu, .bcA, .bcAqua       { border-color: Aqua;}
 
-.cGry, .cGy, .cGray			{ color: Gray;}
-.bgGry, .bgGy, .bgGray		{ background-color: Gray;}
-.bcGry, .bcGy, .bcGray		{ border-color: Gray;}
+.cGry, .cGy, .cGray         { color: Gray;}
+.bgGry, .bgGy, .bgGray      { background-color: Gray;}
+.bcGry, .bcGy, .bcGray      { border-color: Gray;}
 
-.cSlv, .cS, .cSilver		{ color: Silver;}
-.bgSlv, .bgS, .bgSilver		{ background-color: Silver;}
-.bcSlv, .bcS, .bcSilver		{ border-color: Silver;}
+.cSlv, .cS, .cSilver        { color: Silver;}
+.bgSlv, .bgS, .bgSilver     { background-color: Silver;}
+.bcSlv, .bcS, .bcSilver     { border-color: Silver;}
 
-.cWht, .cW, .cWhite			{ color: White;}
-.bgWht, .bgW, .bgWhite		{ background-color: White;}
-.bcWht, .bcW, .bcWhite		{ border-color: White;}
+.cWht, .cW, .cWhite         { color: White;}
+.bgWht, .bgW, .bgWhite      { background-color: White;}
+.bcWht, .bcW, .bcWhite      { border-color: White;}
 
 
 /* LUV LCh MAX Colors */
@@ -2277,10 +2277,10 @@ a.ls25:active, .ls25 a:active	{letter-spacing: 0.25em}
 
 /***
 First Letter:
-	P: Pastel (very light)
-	L: Light
-	M: Medium 
-	
+    P: Pastel (very light)
+    L: Light
+    M: Medium 
+    
 Last Letter is Color
 ***/
 
@@ -2342,13 +2342,13 @@ Last Letter is Color
 
 /* Specials */
 
-.cMb, .cMx, .cMyndex		{ color: #30A;}
-.bgMb, .bgMx, .bgMyndex		{ background-color: #30A;}
-.bcMb, .bcMx, .bcMyndex		{ border-color: #30A;}
+.cMb, .cMx, .cMyndex        { color: #30A;}
+.bgMb, .bgMx, .bgMyndex     { background-color: #30A;}
+.bcMb, .bcMx, .bcMyndex     { border-color: #30A;}
 
-.cMye, .cMxy, .cMyellow		{ color: #DB5;}
-.bgMye, .bgMxy, .bgMyellow	{ background-color: #DB5;}
-.bcMye, .bcMxy, .bcMyellow	{ border-color: #DB5;}
+.cMye, .cMxy, .cMyellow     { color: #DB5;}
+.bgMye, .bgMxy, .bgMyellow  { background-color: #DB5;}
+.bcMye, .bcMxy, .bcMyellow  { border-color: #DB5;}
 
 
 /* ************************************************************************** */
