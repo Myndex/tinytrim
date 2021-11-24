@@ -2,7 +2,7 @@
 "name": "TinyTrim",
 "version": "0.0.83-betafish",
 "description": "CSS generic classes for on-the-fly adjustment of elements",
-"main": "dist/TinyTrim.0.0.83.min.css",
+"main": "dist/TinyTrim.0.0.83.min.css"
 },
 "keywords": [
 "color",
@@ -10,7 +10,7 @@
 "CSS",
 "stylesheet",
 "design tools",
-"wireframe",
+"wireframe"
 ],
 "repository": {
 "type": "git",
@@ -20,13 +20,13 @@
 "registry":"https://npm.pkg.github.com"
 },
 "devDependencies": {
-"None": "0",
+"None": "0"
 },
 "scripts": {
-"none": "0",
+"none": "0"
 },
 "files": [
-"dist/*.min.css",
+"dist/*.min.css"
 ], 
 "author": "Andrew Somers me@andysomers.com",
 "license": "Affero GPL v3.0",
