@@ -1,31 +1,33 @@
 {
-"name": "tiny-trim",
-"version": "0.0.83-betafish",
-"description": "CSS generic classes for on-the-fly adjustment of elements",
-"main": "./dist/TinyTrim.0.0.83.min.css",
-"files": [
-	"./dist/*.min.css"
-], 
-"keywords": [
-	"color",
-	"colour",
-	"CSS",
-	"stylesheet",
-	"design tools",
-	"wireframe"
-],
-"repository": {
-"type": "git",
-"url": "git+https://github.com/Myndex/TinyTrim.git"
-},
-"publishConfig": {
-"registry":"https://npm.pkg.github.com"
-},
-
-"author": "Andrew Somers me@andysomers.com",
-"license": "Affero GPL v3.0",
-"bugs": {
-"url": "https://github.com/Myndex/TinyTrim/issues"
-},
-"homepage": "https://www.myndex.com/WEB/"
+  "name": "tiny-trim",
+  "version": "0.0.83-betafish",
+  "description": "CSS generic classes for on-the-fly adjustment of elements",
+  "main": "./dist/TinyTrim.0.0.83.min.css",
+  "files": [
+    "./dist/*.min.css"
+  ],
+  "keywords": [
+    "color",
+    "colour",
+    "CSS",
+    "stylesheet",
+    "design tools",
+    "wireframe"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Myndex/TinyTrim.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "author": "Andrew Somers me@andysomers.com",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/Myndex/TinyTrim/issues"
+  },
+  "homepage": "https://www.myndex.com/WEB/",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }
