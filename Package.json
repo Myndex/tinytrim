@@ -19,7 +19,7 @@
     "url": "git+https://github.com/Myndex/TinyTrim.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com/Myndex"
   },
   "author": "Andrew Somers me@andysomers.com",
   "license": "AGPL-3.0-or-later",
