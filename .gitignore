@@ -1,6 +1,10 @@
 # Compiled class file
 *.class
 
+# HTML
+*.html
+*.htm
+
 # DEPRECATED
 DEPRECIATED/
 DEPRECATED/
