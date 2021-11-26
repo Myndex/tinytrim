@@ -1,8 +1,8 @@
 {
   "name": "tinytrim",
-  "version": "0.0.84-betafish",
+  "version": "0.0.85-betafish",
   "description": "CSS generic classes for on-the-fly adjustment of elements",
-  "main": "./dist/tinytrim.0.0.84.min.css",
+  "main": "./dist/tinytrim.0.0.85.min.css",
   "keywords": [
     "color",
     "colour",
