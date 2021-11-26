@@ -1,11 +1,8 @@
 {
-  "name": "tiny-trim",
+  "name": "tinytrim",
   "version": "0.0.83-betafish",
   "description": "CSS generic classes for on-the-fly adjustment of elements",
-  "main": "./dist/TinyTrim.0.0.83.min.css",
-  "files": [
-    "./dist/*.min.css"
-  ],
+  "main": "./dist/tinytrim.0.0.83.min.css",
   "keywords": [
     "color",
     "colour",
@@ -14,10 +11,10 @@
     "design tools",
     "wireframe"
   ],
-  "author": "Andrew Somers me@andysomers.com",
+  "author": "Andrew Somers",
   "license": "AGPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/Myndex/TinyTrim/issues"
+    "url": "https://github.com/Myndex/tinytrim/issues"
   },
   "homepage": "https://www.myndex.com/WEB/",
   "scripts": {
