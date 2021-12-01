@@ -1,4 +1,29 @@
 # TinyTrim v0.0.84 - betafish
+
+<p align="center">
+
+  <a href="https://npmjs.org/package/tinytrim">
+    <img src="https://badgen.net/npm/v/tinytrim?color=3000c0&icon=npm" alt="version" />
+  </a> &nbsp;&nbsp;
+  <a href="https://npmjs.org/package/tinytrim">
+    <img src="https://badgen.net/npm/dt/tinytrim?color=6000b0&icon=npm" alt="downloads" />
+  </a> &nbsp;&nbsp;
+  <a href="https://github.com/Myndex/tinytrim">
+    <img src="https://badgen.net/github/last-commit/Myndex/tinytrim/?icon=github" alt="last commit" />
+  </a> &nbsp;&nbsp;
+  <a href="https://github.com/Myndex/tinytrim/blob/master/LICENSE.txt">
+    <img src="https://badgen.net/github/license/Myndex/tinytrim?color=BB5FD1" alt="license" />
+  </a> &nbsp;&nbsp;
+  <a href="https://twitter.com/MyndexResearch">
+    <img src="https://badgen.net/twitter/follow/MyndexResearch?icon=twitter" alt="twitter" />
+  </a> &nbsp;&nbsp;
+  <a href="">
+    <img src="https://badgen.net/badge/CSS/level_3/008833" alt="CSS level 3" />
+  </a>
+</p>
+
+
+
 A set of CSS generic classes for on-the-fly adjustment of elements without having to add a long style list every time you need to adjust an element like:
 
     style="lots-of-stuff: #ugh;"
