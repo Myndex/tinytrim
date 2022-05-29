@@ -1,31 +1,47 @@
-/******************************************************************************/
-/******************************************************************************/
-/****************                                       ***********************/
-/****************          T I N Y    T R I M           ***********************/
-/****************                                       ***********************/
-/******************************************************************************/
-/****************                                       ***********************/
-/****************   TRIM CLASSES  —  Myndex TinyTrim™   ***********************/
-/****************       Version 0.0.85  Nov 2021        ***********************/
-/****************           By Andrew Somers            ***********************/
-/****************  Copyright © 2019-2021 By Myndex.com  ***********************/
-/****************          All Rights Reserved          ***********************/
-/****************                                       ***********************/
-/****************       Free for non-commercial use     ***********************/
-/****************       under the AGPL v03 license      ***********************/
-/****************                                       ***********************/
-/******************************************************************************/
-/******************************************************************************/
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* **************                                       ********************* */
+/* **************          T I N Y    T R I M           ********************* */
+/* **************                                       ********************* */
+/* ************************************************************************** */
+/* **************                                       ********************* */
+/* **************   TRIM CLASSES  —  Myndex TinyTrim™   ********************* */
+/* **************       Version 0.0.86  MAY 28 2022     ********************* */
+/* **************           By Andrew Somers            ********************* */
+/* **************  Copyright © 2019-2022 By Myndex.com  ********************* */
+/* **************          All Rights Reserved          ********************* */
+/* **************                                       ********************* */
+/* **************       Free for non-commercial use     ********************* */
+/* **************         (meaning no resale, LOL)      ********************* */
+/* **************       under the AGPL v03 license      ********************* */
+/* **************                                       ********************* */
+/* ************************************************************************** */
+/* ************************************************************************** */
 
 
-/****************************************************************/
+/* ************************************************************ */
 /*              *********************************               */
-/******************       REFERENCE GUIDE      ******************/
+/* ****************       REFERENCE GUIDE      **************** */
 /*              *********************************               */
-/****************************************************************/
+/* ************************************************************ */
 
 
 /*
+
+TinyTrim is a set of classes that can be easily remembered, but use only 
+a few characters for the class names. This makes it easy when prototyping
+of adjusting existing CSS. For instance, the following:
+
+.myClass {
+  position: relative;
+  margin: 0;
+  padding: 1em;
+  font-size: 20px;
+  color: red;
+  background-color: 
+}
+
+
 ******     ******      FIRST LETTER:    ******      ******
 ******   a '0' indicates a number is required      *******
 
@@ -83,7 +99,7 @@
 .t or .ta   text-align
 .tl     text-align-last
 .ti     text-indent
-
+.tb     tab spaces (for pre)
 .v      visibility or vertical align
 .va     vertical align for initial, inherit, others as alias
 .ws     white-space
@@ -102,7 +118,7 @@
     o   oblique
     it  italic
     
-    NoLetter: normal
+    No Letter: normal
     
     b   both, bold
     b   (when after numbers): bottom    
@@ -142,7 +158,7 @@
     LAST LETTER, AFTER NUMBERS
 
     r   rem
-    p   prcentage
+    p   percentage
     x   px
     t   pt
     v   vh or vw
@@ -151,7 +167,7 @@
 ************   */
 
 /*    ******      CURRENT CONFLICT ISSUES      ******
-NONE
+NONE KNOWN
 */
 
 /*    ****         TO DO      ****
@@ -169,81 +185,137 @@ cursor: value;
 
 
 
-/*  SUGGESTED CSS BLOCK ORDER EXAMPLE
+/* *****  SUGGESTED CSS BLOCK ORDER EXAMPLE  ***** */
+
+/* 
+Essentially, this comes down to: 
+
+{ object (size/position) -> text properties -> appearance (color, BG, borders) }
+
     
 .selector {
     display
-    positions
+    position *type* (relative, absolute etc)
+    container sizing (width/height)
+    floats & clears
     margins
     paddings
-    container size (width/height)
-    floats and clears
+    moves (top, bottom, etc)
     
     font-family
     font-size,weight,style,decoration
     letter-spacing & line-height
     text alignment, whitespace
-    overflow, other text related
+    overflow, other text related properties
     
     color
     background
-    borders/outlines
-    opacity
+    borders/outlines **
     text-shadow
     box-shadow
+    opacity (total container, notwithstanding other transparencies)
     }
+
+** borders go near the end of the stack when "border-box" is being used, but if
+border-box is not being used, then borders should be in the first group near
+container size.
+
+We assume that the following is at the top of the first style sheet:
+
+    * {box-sizing: border-box}
 */
 
-/**************************************************/
-/**************************************************/
-/**********            CLASSES           **********/
-/**************************************************/
-/**************************************************/
+/* ********************************************** */
+/* ********************************************** */
+/* ********            CLASSES           ******** */
+/* ********************************************** */
+/* ********************************************** */
 
 
-/**************************************************/
-/**********            SETUPS            **********/
-/**************************************************/
+/* ********************************************** */
+/* ********            SETUPS            ******** */
+/* ********************************************** */
 
-/****       UNSETS      ****/
+/* **       UNSETS      ** */
 
 .ai, .uni {all: initial}
 .ah, .unh {all: inherit}
 .au, .uns {all: unset}
 
-/****    MOST BASIC RESETS   ****/
+/* **    VERY BASIC RESET   ** */
 
-* {box-sizing: border-box}
+/* This is a slightly opinionated set of defaults for the head of the sheet */
 
-body, main {
+/* <- remove this line to activate this reset ->
+
+* { box-sizing: border-box; }
+
+body {
+    min-height: 100%;
+    min-width: 100%;
     margin: 0;
     padding: 0;
+    font-family: Verdana, sans-serif;
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: normal;
     font-style: normal;
-    line-height: 1.3;
-    border: none;
+    line-height: 1.35;
     color: #000;
+    background: none; 
     background-color: #e4e4e4;
+    border: none;
     }
-div, article, section {
-    margin: 0.5em;
-    padding: 0.75em;
-    line-height: 1.3;
+main, header, footer  {
+    display: block;
+    margin: 0;
+    padding: 0;
+    background: none; 
+    border: none;
     }
-p, ul, ol, li {
-    margin: 0.5em;
-    padding: 0.25em;
+article, section, aside {
+    position: relative;
+    margin: 0.5rem;
+    padding: 1rem;
+    font-size: 1rem;
+    line-height: 1.35;
+    border: none;
+    }
+p, ul, ol, li, div, span,
+h1,h2,h3,h4,h5,h6 {
+    position: relative;
+    margin: 0.25rem 0 0.5rem;
+    padding: 0;
+    font-size: 1rem;
     text-align: left;
-    line-height: 1.3;
+    line-height: 1.35;
+    border: none;
     }
+h1,h2,h3,h4,h5,h6 { margin: 0.75em 0 0.33em; }
+button, input, optgroup, select, textarea { 
+    position: relative;
+    margin: 0;
+    font: inherit;
+    }
+pre, code, kbd, samp {
+    position: relative;
+    font-family: monospace, monospace;
+    font-size: 1em;
+    }
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    }
+img { display: block; position: relative; }
+b, strong { font-weight: bolder; }
+
+/* **   END OF BASIC RESET   ** */
     
     
-/**************************************************/
-/**********    DISPLAY and VISIBILITY    **********/
-/**************************************************/
+/* ********************************************** */
+/* ********    DISPLAY and VISIBILITY    ******** */
+/* ********************************************** */
     
-/****      DISPLAY GUIDE     ********
+/* **      DISPLAY GUIDE     ********
 
 General guidelines
 
@@ -267,22 +339,22 @@ General guidelines
     rt ruby text
     ry ruby
 
-**************/
+************ */
 
-/****     ds global values    ****/
+/* **     ds global values    ** */
 .dsi {display: initial}
 .dsh {display: inherit}
 .dsu {display: unset}
 
-/****     d display-box values    ****/
+/* **     d display-box values    ** */
 .dc {display: contents}
 
 .dn, body .dn, body main .dn,
-body main div.dn, body main div .dn {display: none}
+body main div.dn, body main div .dn { display: none }
 /* dn specificity added to help provide override */
 
 
-/****     d display-outside values    ****/
+/* **     d display-outside values    ** */
 
 .db, body .db, body main .db,
 body main div.db, body main div .db {display: block}
@@ -292,7 +364,7 @@ body main div.db, body main div .db {display: block}
 .di {display: inline}
 .dr {display: run-in}
 
-/****     d display-legacy values    ****/
+/* **     d display-legacy values    ** */
 
 .dib, body .dib, body main .dib,
 body main div.dib, body main div .dib {display: inline-block}
@@ -303,7 +375,7 @@ body main div.dib, body main div .dib {display: inline-block}
 .dig {display: inline-grid}
 .dit {display: inline-table}
 
-/****     d display-inside values    ****/
+/* **     d display-inside values    ** */
 .df {display: flow}
 .dfr {display: flow-root}
 .dt {display: table}
@@ -311,12 +383,12 @@ body main div.dib, body main div .dib {display: inline-block}
 .dg {display: grid}
 .dry {display: ruby}
 
-/****     ds display-outside plus display-inside values    ****/
+/* **     ds display-outside plus display-inside values    ** */
 .dsbf {display: block flow}
 .dsit {display: inline table}
 .dfxr {display: flex run-in}
 
-/****     dl display-list-item values    ****/
+/* **     dl display-list-item values    ** */
 .dl {display: list-item}
 .dlb {display: list-item block}
 .dli {display: list-item inline}
@@ -327,7 +399,7 @@ body main div.dib, body main div .dib {display: inline-block}
 
 .dflb {display: flow list-item block}
 
-/****     dt display-internal values    ****/
+/* **     dt display-internal values    ** */
 .dtrg {display: table-row-group}
 .dthg {display: table-header-group}
 .dtfg {display: table-footer-group}
@@ -344,7 +416,7 @@ body main div.dib, body main div .dib {display: inline-block}
 
 
 
-/****     VISIBILITY    ****/
+/* **     VISIBILITY    ** */
 
 .vi {visibility: initial}
 .vh {visibility: inherit}
@@ -353,7 +425,7 @@ body main div.dib, body main div .dib {display: inline-block}
 .vc {visibility: collapse}
 
 
-/****     OVERFLOW AND WRAP    ****/
+/* **     OVERFLOW AND WRAP    ** */
 
 .oi {overflow: initial}
 .oh {overflow: inherit}
@@ -378,39 +450,52 @@ body main div.dib, body main div .dib {display: inline-block}
 .wspw {white-space: pre-wrap}
 
 
-/**************************************************/
-/***************     SPECIALS    ******************/
-/**************************************************/
+/* ********************************************** */
+/* *************     SPECIALS    **************** */
+/* ********************************************** */
 
 .aa {
  -webkit-font-smoothing: auto;
  -moz-osx-font-smoothing: auto;
- font-smooth: auto;
+ /*font-smooth: auto;*/
 }
 
 /* The below should NOT be used on readable text!! */
 .aaa {
  -webkit-font-smoothing: antialiased;
  -moz-osx-font-smoothing: grayscale;
- font-smooth: always;
+ /*font-smooth: always;*/
+}
+
+.aasp {
+ -webkit-font-smoothing: subpixel-antialiased;
+ -moz-osx-font-smoothing: auto;
+ /*font-smooth: always;*/
 }
 
 
 
-/******************************************/
-/**********     ELEMENT SIZE    ***********/
-/******************************************/
 
-/****     sizes    ****/
+/* ************************************** */
+/* ********     ELEMENT SIZE    ********* */
+/* ************************************** */
 
-/****     w width    ****/
+.mnw100   {min-width:100%}
+.mnh100   {min-height:100%}
+.mxw100   {max-width:100%}
+.mxh100   {max-height:100%}
+
+/* **     sizes    ** */
+
+/* **     w width    ** */
 
 .wi {width: initial}
 .wh {width: inherit}
 .wa {width: auto}
 .wu {width: unset}
 
-/****     w_p width in px    ****/
+
+/* **     w_p width in px    ** */
 
 .w1x {width: 10px}
 .w2x {width: 20px}
@@ -447,7 +532,8 @@ body main div.dib, body main div .dib {display: inline-block}
 .w65x {width: 650px}
 .w70x {width: 700px}
 
-/****     w width as percentage    ****/
+
+/* **     w width as percentage    ** */
 
 .w05p {width: 5%}
 .w10p {width: 10%}
@@ -474,7 +560,8 @@ body main div.dib, body main div .dib {display: inline-block}
 .w115p {width: 115%}
 .w120p {width: 120%}
 
-/****     w width in vw    ****/
+
+/* **     w width in vw    ** */
 
 .w05v {width: 5vw}
 .w10v {width: 10vw}
@@ -498,14 +585,15 @@ body main div.dib, body main div .dib {display: inline-block}
 .w100v {width: 100vw}
 
 
-/****     h height    ****/
+/* **     h height    ** */
 
 .hi {height: initial}
 .hh {height: inherit}
 .ha {height: auto}
 .hu {height: unset}
 
-/****     h_p height as px    ****/
+
+/* **     h_p height as px    ** */
 
 .h1x {height: 10px}
 .h2x {height: 20px}
@@ -542,7 +630,8 @@ body main div.dib, body main div .dib {display: inline-block}
 .h65x {height: 650px}
 .h70x {height: 700px}
 
-/****     h height as percentage    ****/
+
+/* **     h height as percentage    ** */
 
 .h05p {height: 5%}
 .h10p {height: 10%}
@@ -569,7 +658,8 @@ body main div.dib, body main div .dib {display: inline-block}
 .h115p {height: 115%}
 .h120p {height: 120%}
 
-/****     h height in vh    ****/
+
+/* **     h height in vh    ** */
 
 .h05v {height: 05vh}
 .h10v {height: 10vh}
@@ -594,11 +684,11 @@ body main div.dib, body main div .dib {display: inline-block}
 
 
 
-/******************************************/
-/**********     POSITION       ************/
-/******************************************/
+/* ************************************** */
+/* ********     POSITION       ********** */
+/* ************************************** */
 
-/****     positions .po ( .pa, .pr, conflict with padding)    ****/
+/* **     positions .po ( .pa, .pr, conflict with padding)    ** */
 
 .pi, .poi {position: initial}
 .ph, .poh {position: inherit}
@@ -614,7 +704,7 @@ body main div.por, body main div .por
 .pf, .pof {position: fixed}
 
 
-/****     fl floats    ****/
+/* **     fl floats    ** */
 
 .fli {float: initial}
 .flh {float: inherit}
@@ -624,7 +714,7 @@ body main div.por, body main div .por
 .flr {float: right}
 
 
-/****     c clears    ****/
+/* **     c clears    ** */
 
 .cli {clear: initial}
 .clh {clear: inherit}
@@ -646,19 +736,19 @@ body main div.por, body main div .por
 
 .clf:after {clear: both}
 
-/****     For IE 6/7 only
+/* **     For IE 6/7 only
  Include this rule to trigger hasLayout and contain floats.
-****/
+** */
 .clf {*zoom: 1}
 
 
 
 
-/******************************************/
-/********    MARGINS and PADDING   ********/
-/******************************************/
+/* ************************************** */
+/* ******    MARGINS and PADDING   ****** */
+/* ************************************** */
 
-/****     m margins    ****/
+/* **     m margins    ** */
 
 .mi {margin: initial}
 .mh {margin: inherit}
@@ -692,8 +782,8 @@ body main div.por, body main div .por
 .m25 {margin: 2.5em}
 
 
-/****     ma define v margin, h margin auto    ****/
-/****     use with position: relative; to center an element    ****/
+/* **     ma define v margin, h margin auto    ** */
+/* **     use with position: relative; to center an element    ** */
 
 .ma0, .ma00 {margin: 0 auto}
 .ma01 {margin: 0.1em auto}
@@ -722,7 +812,70 @@ body main div.por, body main div .por
 .ma24 {margin: 2.4em auto}
 .ma25 {margin: 2.5em auto}
 
-/****     mt margin top    ****/
+
+/* **     ma00r define v margin, h margin auto in REM   ** */
+/* **     use with position: relative; to center an element    ** */
+
+.ma0r, .ma00r {margin: 0 auto}
+.ma01r{margin: 0.1rem auto}
+.ma02r{margin: 0.2rem auto}
+.ma03r{margin: 0.3rem auto}
+.ma04r{margin: 0.4rem auto}
+.ma05r{margin: 0.5rem auto}
+.ma06r{margin: 0.6rem auto}
+.ma07r{margin: 0.7rem auto}
+.ma08r{margin: 0.8rem auto}
+.ma09r{margin: 0.9rem auto}
+.ma10r{margin: 1.0rem auto}
+.ma11r{margin: 1.1rem auto}
+.ma12r{margin: 1.2rem auto}
+.ma13r{margin: 1.3rem auto}
+.ma14r{margin: 1.4rem auto}
+.ma15r{margin: 1.5rem auto}
+.ma16r{margin: 1.6rem auto}
+.ma17r{margin: 1.7rem auto}
+.ma18r{margin: 1.8rem auto}
+.ma19r{margin: 1.9rem auto}
+.ma20r{margin: 2.0rem auto}
+.ma21r{margin: 2.1rem auto}
+.ma22r{margin: 2.2rem auto}
+.ma23r{margin: 2.3rem auto}
+.ma24r{margin: 2.4rem auto}
+.ma25r{margin: 2.5rem auto}
+
+
+.ma0x, .ma00x {margin: 0 auto}
+ma1x,ma01x{margin: 1px auto}
+ma2x,ma02x{margin: 2px auto}
+ma3x,ma03x{margin: 3px auto}
+ma4x,ma04x{margin: 4px auto}
+ma5x,ma05x{margin: 5px auto}
+ma6x,ma06x{margin: 6px auto}
+ma7x,ma07x{margin: 7px auto}
+ma8x,ma08x{margin: 8px auto}
+ma9x,ma09x{margin: 9px auto}
+ma10x{margin: 10px auto}
+ma11x{margin: 11px auto}
+ma12x{margin: 12px auto}
+ma13x{margin: 13px auto}
+ma14x{margin: 14px auto}
+ma15x{margin: 15px auto}
+ma16x{margin: 16px auto}
+ma17x{margin: 17px auto}
+ma18x{margin: 18px auto}
+ma19x{margin: 19px auto}
+ma20x{margin: 20px auto}
+ma21x{margin: 21px auto}
+ma22x{margin: 22px auto}
+ma23x{margin: 23px auto}
+ma24x{margin: 24px auto}
+ma25x{margin: 25px auto}
+
+
+/* **     ma00r define v margin, h margin auto in REM   ** */
+/* **     use with position: relative; to center an element    ** */
+
+/* **     mt margin top    ** */
 
 .mt, .mt0, .mt00 {margin-top: 0}
 .mt01 {margin-top: 0.1em}
@@ -751,7 +904,7 @@ body main div.por, body main div .por
 .mt24 {margin-top: 2.4em}
 .mt25 {margin-top: 2.5em}
 
-/****     mr margin right    ****/
+/* **     mr margin right    ** */
 
 .mr, .mr0, .mr00 {margin-right: 0}
 .mr01 {margin-right: 0.1em}
@@ -780,7 +933,7 @@ body main div.por, body main div .por
 .mr24 {margin-right: 2.4em}
 .mr25 {margin-right: 2.5em}
 
-/****     mb margin bottom    ****/
+/* **     mb margin bottom    ** */
 
 .mb, .mb0, .mb00 {margin-bottom: 0}
 .mb01 {margin-bottom: 0.1em}
@@ -809,7 +962,7 @@ body main div.por, body main div .por
 .mb24 {margin-bottom: 2.4em}
 .mb25 {margin-bottom: 2.5em}
 
-/****     ml margin left    ****/
+/* **     ml margin left    ** */
 
 .ml, .ml0, .ml00 {margin-left: 0}
 .ml01 {margin-left: 0.1em}
@@ -841,16 +994,16 @@ body main div.por, body main div .por
 
 
 
-/******************************************/
-/**********      PADDING         **********/
-/******************************************/
+/* ************************************** */
+/* ********      PADDING         ******** */
+/* ************************************** */
 
-/****     p padding    ****/
+/* **     p padding    ** */
 
 .pi {padding: initial}
 .ph {padding: inherit}
 
-.p, .pa, .p0, .pa0, .p00, .pa00 {padding: 0}
+.p0, .pa0, .p00, .pa00 {padding: 0}
 .p01, .pa01 {padding: 0.1em}
 .p02, .pa02 {padding: 0.2em}
 .p03, .pa03 {padding: 0.3em}
@@ -877,7 +1030,7 @@ body main div.por, body main div .por
 .p24, .pa24 {padding: 2.4em}
 .p25, .pa25 {padding: 2.5em}
 
-/****     pt padding top    ****/
+/* **     pt padding top    ** */
 
 .pt, .pt0, .pt00 {padding-top: 0}
 .pt01 {padding-top: 0.1em}
@@ -906,7 +1059,7 @@ body main div.por, body main div .por
 .pt24 {padding-top: 2.4em}
 .pt25 {padding-top: 2.5em}
 
-/****     pr padding right    ****/
+/* **     pr padding right    ** */
 
 .pr, .pr0, .pr00 {padding-right: 0}
 .pr01 {padding-right: 0.1em}
@@ -935,7 +1088,7 @@ body main div.por, body main div .por
 .pr24 {padding-right: 2.4em}
 .pr25 {padding-right: 2.5em}
 
-/****     pb padding bottom    ****/
+/* **     pb padding bottom    ** */
 
 .pb, .pb0, .pb00 {padding-bottom: 0}
 .pb01 {padding-bottom: 0.1em}
@@ -964,7 +1117,7 @@ body main div.por, body main div .por
 .pb24 {padding-bottom: 2.4em}
 .pb25 {padding-bottom: 2.5em}
 
-/****     pl padding left    ****/
+/* **     pl padding left    ** */
 
 .pl, .pl0, .pl00 {padding-left: 0}
 .pl01 {padding-left: 0.1em}
@@ -995,11 +1148,157 @@ body main div.por, body main div .por
 
 
 
-/******************************************/
-/*********     POSITION ADJUST    *********/
-/******************************************/
 
-/****     pot position top in px    ****/
+
+p0x, pa0x, p00x, pa00x{padding: 0}
+p01x, pa01x{padding: 1px}
+p02x, pa02x{padding: 2px}
+p03x, pa03x{padding: 3px}
+p04x, pa04x{padding: 4px}
+p05x, pa05x{padding: 5px}
+p06x, pa06x{padding: 6px}
+p07x, pa07x{padding: 7px}
+p08x, pa08x{padding: 8px}
+p09x, pa09x{padding: 9px}
+p10x, pa10x{padding: 10px}
+p11x, pa11x{padding: 11px}
+p12x, pa12x{padding: 12px}
+p13x, pa13x{padding: 13px}
+p14x, pa14x{padding: 14px}
+p15x, pa15x{padding: 15px}
+p16x, pa16x{padding: 16px}
+p17x, pa17x{padding: 17px}
+p18x, pa18x{padding: 18px}
+p19x, pa19x{padding: 19px}
+p20x, pa20x{padding: 20px}
+p21x, pa21x{padding: 21px}
+p22x, pa22x{padding: 22px}
+p23x, pa23x{padding: 23px}
+p24x, pa24x{padding: 24px}
+p25x, pa25x{padding: 25px}
+
+/* **     pt padding top    ** */
+
+ptx, pt0x, pt00x{padding-top: 0}
+pt01x{padding-top: 1px}
+pt02x{padding-top: 2px}
+pt03x{padding-top: 3px}
+pt04x{padding-top: 4px}
+pt05x{padding-top: 5px}
+pt06x{padding-top: 6px}
+pt07x{padding-top: 7px}
+pt08x{padding-top: 8px}
+pt09x{padding-top: 9px}
+pt10x{padding-top: 10px}
+pt11x{padding-top: 11px}
+pt12x{padding-top: 12px}
+pt13x{padding-top: 13px}
+pt14x{padding-top: 14px}
+pt15x{padding-top: 15px}
+pt16x{padding-top: 16px}
+pt17x{padding-top: 17px}
+pt18x{padding-top: 18px}
+pt19x{padding-top: 19px}
+pt20x{padding-top: 20px}
+pt21x{padding-top: 21px}
+pt22x{padding-top: 22px}
+pt23x{padding-top: 23px}
+pt24x{padding-top: 24px}
+pt25x{padding-top: 25px}
+
+/* **     pr padding right    ** */
+
+prx, pr0x, pr00x{padding-right: 0}
+pr01x{padding-right: 1px}
+pr02x{padding-right: 2px}
+pr03x{padding-right: 3px}
+pr04x{padding-right: 4px}
+pr05x{padding-right: 5px}
+pr06x{padding-right: 6px}
+pr07x{padding-right: 7px}
+pr08x{padding-right: 8px}
+pr09x{padding-right: 9px}
+pr10x{padding-right: 10px}
+pr11x{padding-right: 11px}
+pr12x{padding-right: 12px}
+pr13x{padding-right: 13px}
+pr14x{padding-right: 14px}
+pr15x{padding-right: 15px}
+pr16x{padding-right: 16px}
+pr17x{padding-right: 17px}
+pr18x{padding-right: 18px}
+pr19x{padding-right: 19px}
+pr20x{padding-right: 20px}
+pr21x{padding-right: 21px}
+pr22x{padding-right: 22px}
+pr23x{padding-right: 23px}
+pr24x{padding-right: 24px}
+pr25x{padding-right: 25px}
+
+/* **     pb padding bottom    ** */
+
+pbx, pb0x, pb00x{padding-bottom: 0}
+pb01x{padding-bottom: 1px}
+pb02x{padding-bottom: 2px}
+pb03x{padding-bottom: 3px}
+pb04x{padding-bottom: 4px}
+pb05x{padding-bottom: 5px}
+pb06x{padding-bottom: 6px}
+pb07x{padding-bottom: 7px}
+pb08x{padding-bottom: 8px}
+pb09x{padding-bottom: 9px}
+pb10x{padding-bottom: 10px}
+pb11x{padding-bottom: 11px}
+pb12x{padding-bottom: 12px}
+pb13x{padding-bottom: 13px}
+pb14x{padding-bottom: 14px}
+pb15x{padding-bottom: 15px}
+pb16x{padding-bottom: 16px}
+pb17x{padding-bottom: 17px}
+pb18x{padding-bottom: 18px}
+pb19x{padding-bottom: 19px}
+pb20x{padding-bottom: 20px}
+pb21x{padding-bottom: 21px}
+pb22x{padding-bottom: 22px}
+pb23x{padding-bottom: 23px}
+pb24x{padding-bottom: 24px}
+pb25x{padding-bottom: 25px}
+
+/* **     pl padding left    ** */
+
+plx, pl0x, pl00x{padding-left: 0}
+pl01x{padding-left: 1px}
+pl02x{padding-left: 2px}
+pl03x{padding-left: 3px}
+pl04x{padding-left: 4px}
+pl05x{padding-left: 5px}
+pl06x{padding-left: 6px}
+pl07x{padding-left: 7px}
+pl08x{padding-left: 8px}
+pl09x{padding-left: 9px}
+pl10x{padding-left: 10px}
+pl11x{padding-left: 11px}
+pl12x{padding-left: 12px}
+pl13x{padding-left: 13px}
+pl14x{padding-left: 14px}
+pl15x{padding-left: 15px}
+pl16x{padding-left: 16px}
+pl17x{padding-left: 17px}
+pl18x{padding-left: 18px}
+pl19x{padding-left: 19px}
+pl20x{padding-left: 20px}
+pl21x{padding-left: 21px}
+pl22x{padding-left: 22px}
+pl23x{padding-left: 23px}
+pl24x{padding-left: 24px}
+pl25x{padding-left: 25px}
+
+
+/* ************************************** */
+/* *******     POSITION ADJUST    ******* */
+/* ************************************** */
+
+/* **     pot position top in px    ** */
 
 .pot-9x {top: -9px}
 .pot-8x {top: -8px}
@@ -1037,7 +1336,7 @@ body main div.por, body main div .por
 .pot24x {top: 24px}
 .pot25x {top: 25px}
 
-/****     por position right in px    ****/
+/* **     por position right in px    ** */
 
 .por-9x {right: -9px}
 .por-8x {right: -8px}
@@ -1075,7 +1374,7 @@ body main div.por, body main div .por
 .por24x {right: 24px}
 .por25x {right: 25px}
 
-/****     pob position bottom in px    ****/
+/* **     pob position bottom in px    ** */
 
 .pob-9x {bottom: -09px}
 .pob-8x {bottom: -08px}
@@ -1113,7 +1412,7 @@ body main div.por, body main div .por
 .pob24x {bottom: 24px}
 .pob25x {bottom: 25px}
 
-/****     pol position left in px    ****/
+/* **     pol position left in px    ** */
 
 .pol-9x {left: -09px}
 .pol-8x {left: -08px}
@@ -1152,7 +1451,7 @@ body main div.por, body main div .por
 .pol25x {left: 25px}
 
 
-/****     pot position top    ****/
+/* **     pot position top    ** */
 
 .pot-9 {top: -0.9em}
 .pot-8 {top: -0.8em}
@@ -1163,7 +1462,7 @@ body main div.por, body main div .por
 .pot-3 {top: -0.3em}
 .pot-2 {top: -0.2em}
 .pot-1 {top: -0.1em}
-.pot, .pot0, .pot00 {top: 0}
+.pot0, .pot00 {top: 0}
 .pot01 {top: 0.1em}
 .pot02 {top: 0.2em}
 .pot03 {top: 0.3em}
@@ -1190,7 +1489,7 @@ body main div.por, body main div .por
 .pot24 {top: 2.4em}
 .pot25 {top: 2.5em}
 
-/****     por position right    ****/
+/* **     por position right    ** */
 
 .por-9 {right: -0.9em}
 .por-8 {right: -0.8em}
@@ -1201,7 +1500,7 @@ body main div.por, body main div .por
 .por-3 {right: -0.3em}
 .por-2 {right: -0.2em}
 .por-1 {right: -0.1em}
-.por, .por0, .por00 {right: 0}
+.por0, .por00 {right: 0}
 .por01 {right: 0.1em}
 .por02 {right: 0.2em}
 .por03 {right: 0.3em}
@@ -1228,7 +1527,7 @@ body main div.por, body main div .por
 .por24 {right: 2.4em}
 .por25 {right: 2.5em}
 
-/****     pob position bottom    ****/
+/* **     pob position bottom    ** */
 
 .pob-9 {bottom: -0.9em}
 .pob-8 {bottom: -0.8em}
@@ -1239,7 +1538,7 @@ body main div.por, body main div .por
 .pob-3 {bottom: -0.3em}
 .pob-2 {bottom: -0.2em}
 .pob-1 {bottom: -0.1em}
-.pob, .pob0, .pob00 {bottom: 0}
+.pob0, .pob00 {bottom: 0}
 .pob01 {bottom: 0.1em}
 .pob02 {bottom: 0.2em}
 .pob03 {bottom: 0.3em}
@@ -1266,7 +1565,7 @@ body main div.por, body main div .por
 .pob24 {bottom: 2.4em}
 .pob25 {bottom: 2.5em}
 
-/****     pol position left    ****/
+/* **     pol position left    ** */
 
 .pol-9 {left: -0.9em}
 .pol-8 {left: -0.8em}
@@ -1277,7 +1576,7 @@ body main div.por, body main div .por
 .pol-3 {left: -0.3em}
 .pol-2 {left: -0.2em}
 .pol-1 {left: -0.1em}
-.pol, .pol0, .pol00 {left: 0}
+.pol0, .pol00 {left: 0}
 .pol01 {left: 0.1em}
 .pol02 {left: 0.2em}
 .pol03 {left: 0.3em}
@@ -1310,7 +1609,7 @@ body main div.por, body main div .por
 
 
 
-/****     z Z-INDEX    ****/
+/* **     z Z-INDEX    ** */
 
 .zi {z-index: initial}
 .zh {z-index: inherit}
@@ -1326,7 +1625,7 @@ body main div.por, body main div .por
 .z-3, .z03 {z-index: -3}
 .z-2, .z02 {z-index: -2}
 .z-1, .z01 {z-index: -1}
-.z, .z0, .z00 {z-index: 0}
+.z0, .z00 {z-index: 0}
 .z1 {z-index: 1}
 .z2 {z-index: 2}
 .z3 {z-index: 3}
@@ -1358,36 +1657,36 @@ body main div.por, body main div .por
 
 
 
-/************************************************************************/
+/* ******************************************************************** */
 
-/************************************************************************/
+/* ******************************************************************** */
 
-/************************************************************************/
-/************************************************************************/
-/********************     FONT METRICS and STYLES    ********************/
-/************************************************************************/
-/************************************************************************/
+/* ******************************************************************** */
+/* ******************************************************************** */
+/* ******************     FONT METRICS and STYLES    ****************** */
+/* ******************************************************************** */
+/* ******************************************************************** */
 
-/************************************************************************/
+/* ******************************************************************** */
 
-/************************************************************************/
+/* ******************************************************************** */
 
-/****     f font    ****/
+/* **     f font    ** */
 
 .fi {font: initial}
 .fh {font: inherit}
 
 
-/********************************************************************/
-/*******************     ff FONT FAMILY    **************************/
-/********************************************************************/
-/*******     KeyWords: FonFam FFM FnF fonts myfon mynfon    *********/
-/********************************************************************/
+/* **************************************************************** */
+/* *****************     ff FONT FAMILY    ************************ */
+/* **************************************************************** */
+/* *****     KeyWords: FonFam FFM FnF fonts myfon mynfon    ******* */
+/* **************************************************************** */
 
 /* Obviously these font family classes need to be supported with
  the appropriate font import(s) */
 
-/********     ff SANS-SERIF    ********/
+/* ******     ff SANS-SERIF    ****** */
 
 .ffh {font-family: HelveticaNeueLT, Helvetica, Arial, sans-serif}
 .ffo {font-family: Optima, Calibri, Candara, sans-serif}
@@ -1395,18 +1694,18 @@ body main div.por, body main div .por
 .fft {font-family: "Trebuchet MS", Tahoma, Futura, Geneva, sans-serif}
 .ffv {font-family: Verdana, Tahoma, Geneva, sans-serif}
 
-/********     ff SANS-SERIF Condensed or Extended    ********/
+/* ******     ff SANS-SERIF Condensed or Extended    ****** */
 
 .ffc {font-family: Oswald, HelveticaNeueLTcond, "Avenir Neue Condensed"}
 .ffe {font-family: Michroma, Syncopate, HelveticaNeueLText}
 
-/********     ffd DISPLAY (fonts where the 'normal' is Heavy)    ********/
+/* ******     ffd DISPLAY (fonts where the 'normal' is Heavy)    ****** */
 
 .ffdr {font-family: Rockwell, "Arial Black", Impact, sans-serif}
 .ffda {font-family: "Arial Black", Rockwell, Impact, sans-serif}
 .ffdi {font-family: Impact, "Arial Black", sans-serif}
 
-/********     ffs SERIF    ********/
+/* ******     ffs SERIF    ****** */
 
 .ffst {font-family: TimesLTStd, "Times New Roman", Times, serif}
 .ffsb {font-family: BaskervilleMTPro, Baskerville, Palatino, "Palatino Linotype", serif}
@@ -1414,20 +1713,20 @@ body main div.por, body main div .por
 .ffsp {font-family: "Palatino Linotype", Palatino, Garamond, BaskervilleMTPro, serif}
 .ffsd {font-family: Didot, Georgia, BaskervilleMTPro, Baskerville, serif}
 
-/********     ffm MONO    ********/
+/* ******     ffm MONO    ****** */
 
 .ffma {font-family: Monaco, "Fira Code", Menlo, "Andale Mono", Consolas, monospace}
 .ffmc {font-family: "Courier New", Courier, monospace}
 .ffmm {font-family: Menlo, "Lucida Console", Monaco, monospace}
 .ffma {font-family: "Andale Mono", Consolas, monospace}
 
-/********     ffc CURSIVE    ********/
+/* ******     ffc CURSIVE    ****** */
 
 .ffca {font-family: 'Apple Chancery', cursive}
 .ffcc {font-family: Chalkduster, 'Bradley Hand', cursive}
 .ffcb {font-family: 'Bradley Hand', Chalkduster, cursive}
 
-/********     fff FANTASY    ********/
+/* ******     fff FANTASY    ****** */
 
 .fffp {font-family: papyrus, fantasy}
 .fffc {font-family: herculanum, fantasy}
@@ -1436,17 +1735,17 @@ body main div.por, body main div .por
 .ffft {font-family: Trattatello, fantasy}
 
 
-/**********************************************/
-/**********     fs FONT SIZING     ************/
-/**********************************************/
+/* ****************************************** */
+/* ********     fs FONT SIZING     ********** */
+/* ****************************************** */
 
 
-/****     FONT SIZE    ****/
+/* **     FONT SIZE    ** */
 
 .fsi {font-size: initial}
 .fsh {font-size: inherit}
 
-/****     fs__r Font size in rem    ****/
+/* **     fs__r Font size in rem    ** */
 
 .fs05r {font-size: 0.5rem}
 .fs06r {font-size: 0.6rem}
@@ -1471,7 +1770,7 @@ body main div.por, body main div .por
 .fs25r {font-size: 2.5rem}
 
 
-/****     fs__p Font size in px    ****/
+/* **     fs__p Font size in px    ** */
 
 /* Font Sizes under 14px should not be used for content */
 
@@ -1524,7 +1823,7 @@ body main div.por, body main div .por
 .fs54x {font-size: 54px}
 
 
-/****     fs Font size in em    ****/
+/* **     fs Font size in em    ** */
 
 /* note: less than 1em sizes like .fs5 or
    .fs83 depreciated in favor of .fs083
@@ -1601,24 +1900,22 @@ body main div.por, body main div .por
 .fs50, .fs5 {font-size: 5em}
 .fs55 {font-size: 5.5em}
 
-/*****************************************************/
-/****** FONT WEIGHT STYLE and DECORATION    **********/
-/*****************************************************/
+/* ************************************************* */
+/* **** FONT WEIGHT STYLE and DECORATION    ******** */
+/* ************************************************* */
 
-/****     fw Font weight    ****/
+/* **     fw Font weight    ** */
 
-.fwi {font-style: initial}
-.fwh {font-style: inherit}
+.fwi {font-weight: initial}
+.fwh {font-weight: inherit}
 
 .fw1 {font-weight: 100}
 .fw2 {font-weight: 200}
 .fw3, .fwl, .light {font-weight: 300}
-.fw4, .fw, .fwn, .normal {
- font-weight: 400}
+.fw4, .fwn, .normal {font-weight: 400}
 .fw5 {font-weight: 500}
 .fw6 {font-weight: 600}
-.fw7, .fwb, .bold, .strong {
- font-weight: 700}
+.fw7, .fwb, .bold, .strong {font-weight: 700}
 .fw8 {font-weight: 800}
 .fw9 {font-weight: 900}
 
@@ -1626,7 +1923,7 @@ body main div.por, body main div .por
 .fwbr, .bolder {font-weight: bolder}
 
 
-/****     ft font sTyles   alt is fst    ****/
+/* **     ft font sTyles   alt is fst    ** */
 
 .fti, .fsti {font-style: initial}
 .fth, .fsth {font-style: inherit}
@@ -1637,7 +1934,7 @@ body main div.por, body main div .por
 .ft, .fstn, .normal {font-style: normal}
 
 
-/****     fdx or tdx text-line decorations    ****/
+/* **     fdx or tdx text-line decorations    ** */
 
 .fdi, .tdi {text-decoration: initial}
 .fdh, .tdh {text-decoration: inherit}
@@ -1645,18 +1942,18 @@ body main div.por, body main div .por
 .fdo, .tdo {text-decoration: overline}
 .fdu, .tdu {text-decoration: underline}
 
-.fdt, .tdt,
+.fdt, .tdt,.fdst, .tdst,
 .fst, .tst {text-decoration: line-through}
 
 .fdn, .tdn, .normal {text-decoration: none}
 
 
 
-/*****************************************************/
-/**********     LINE AND LETER SPACING      **********/
-/*****************************************************/
+/* ************************************************* */
+/* ********     LINE AND LETER SPACING      ******** */
+/* ************************************************* */
 
-/****     ls letterspacing    ****/
+/* **     ls letterspacing    ** */
 
 .lsi {letter-spacing: initial}
 .lsi:hover {letter-spacing: initial}
@@ -1710,12 +2007,39 @@ a.ls25:hover, .ls25 a:hover {letter-spacing: 0.25em}
 a.ls25:active, .ls25 a:active {letter-spacing: 0.25em}
 
 
-/****     lh line height    ****/
+.ls01{letter-spacing:0.01em}
+.ls02{letter-spacing:0.02em}
+.ls03{letter-spacing:0.03em}
+.ls04{letter-spacing:0.04em}
+.ls05{letter-spacing:0.05em}
+.ls06{letter-spacing:0.06em}
+.ls07{letter-spacing:0.07em}
+.ls08{letter-spacing:0.08em}
+.ls09{letter-spacing:0.09em}
+.ls10{letter-spacing:0.10em}
+
+.ls-01{letter-spacing:-0.01em}
+.ls-02{letter-spacing:-0.02em}
+.ls-03{letter-spacing:-0.03em}
+.ls-04{letter-spacing:-0.04em}
+.ls-05{letter-spacing:-0.05em}
+.ls-06{letter-spacing:-0.06em}
+.ls-07{letter-spacing:-0.07em}
+.ls-08{letter-spacing:-0.08em}
+.ls-09{letter-spacing:-0.09em}
+.ls-10{letter-spacing:-0.10em}
+
+
+
+
+
+
+/* **     lh line height    ** */
 .lhi {line-height: initial}
 .lhh {line-height: inherit}
 .lhn, .normal {line-height: normal}
 
-/****     lh unitless line height    ****/
+/* **     lh unitless line height    ** */
 
 .lh01 {line-height: 0.1}
 .lh02 {line-height: 0.2}
@@ -1728,14 +2052,23 @@ a.ls25:active, .ls25 a:active {letter-spacing: 0.25em}
 .lh09 {line-height: 0.9}
 .lh10, .lh1 {line-height: 1.0}
 .lh11 {line-height: 1.1}
+.lh115 {line-height: 1.15}
 .lh12 {line-height: 1.2}
+.lh125 {line-height: 1.25}
 .lh13 {line-height: 1.3}
+.lh135 {line-height: 1.35}
 .lh14 {line-height: 1.4}
+.lh145 {line-height: 1.45}
 .lh15 {line-height: 1.5}
+.lh155 {line-height: 1.55}
 .lh16 {line-height: 1.6}
+.lh165 {line-height: 1.65}
 .lh17 {line-height: 1.7}
+.lh175 {line-height: 1.75}
 .lh18 {line-height: 1.8}
+.lh185 {line-height: 1.85}
 .lh19 {line-height: 1.9}
+.lh195 {line-height: 1.95}
 .lh20, .lh2 {line-height: 2.0}
 .lh21 {line-height: 2.1}
 .lh22 {line-height: 2.2}
@@ -1748,7 +2081,7 @@ a.ls25:active, .ls25 a:active {letter-spacing: 0.25em}
 .lh29 {line-height: 2.9}
 .lh30, .lh3 {line-height: 3.0}
 
-/****     lh__p line height in px    ****/
+/* **     lh__p line height in px    ** */
 
 .lh1x, .lh01x {line-height: 1px}
 .lh2x, .lh02x {line-height: 2px}
@@ -1783,11 +2116,11 @@ a.ls25:active, .ls25 a:active {letter-spacing: 0.25em}
 .lh31x {line-height: 31px}
 .lh32x {line-height: 32px}
 
-/*****************************************************/
-/*******   TEXT XFORM, ALIGN, and INDENT    **********/
-/*****************************************************/
+/* *************************************************** */
+/* ******   TEXT XFORM, ALIGN, and INDENT    ********* */
+/* *************************************************** */
 
-/****     tt Text transforms    ****/
+/* ***     tt Text transforms    *** */
 
 .tti {text-transform: initial}
 .tth {text-transform: inherit}
@@ -1796,7 +2129,7 @@ a.ls25:active, .ls25 a:active {letter-spacing: 0.25em}
 .ttu {text-transform: uppercase}
 .ttl {text-transform: lowercase}
 
-/****     t or al Text Aligns    ****/
+/* ***     t or al Text Aligns    *** */
 
 .tai {text-align: initial}
 .tah {text-align: inherit}
@@ -1815,22 +2148,41 @@ a.ls25:active, .ls25 a:active {letter-spacing: 0.25em}
 .tls {text-align-last: start}
 .tle {text-align-last: end}
 
-/****     v vertical-align    ****/
-
-.vai {vertical-align: initial}
-.vah {vertical-align: inherit}
-.vabl, .vbl {vertical-align: baseline}
-.val, .vl {vertical-align: length}
-.vasb, .vsb {vertical-align: sub}
-.vasp, .vsp {vertical-align: super}
-.vat, .vt {vertical-align: top}
-.vaxt, .vxt {vertical-align: text-top}
-.vam, .vm {vertical-align: middle}
-.vab, .vb {vertical-align: bottom}
-.vaxb, .vxb {vertical-align: text-bottom}
 
 
-/****     ti Text indents    ****/
+/* **     TAB SPACING for PRE    ** */
+
+.tb2,.tb04{tab-size:2}
+.tb3,.tb04{tab-size:3}
+.tb4,.tb04{tab-size:4}
+.tb5,.tb05{tab-size:5}
+.tb6,.tb06{tab-size:6}
+.tb7,.tb07{tab-size:7}
+.tb8,.tb08{tab-size:8}
+.tb9,.tb09{tab-size:9}
+.tb10{tab-size:10}
+.tb11{tab-size:11}
+.tb12{tab-size:12}
+.tb13{tab-size:13}
+.tb14{tab-size:14}
+.tb15{tab-size:15}
+.tb16{tab-size:16}
+.tb17{tab-size:17}
+.tb18{tab-size:18}
+.tb19{tab-size:29}
+.tb20{tab-size:20}
+
+
+
+
+
+
+
+
+
+
+
+/* **     ti Text indents    ** */
 
 .tii {text-indent: initial}
 .tih {text-indent: inherit}
@@ -1874,10 +2226,32 @@ a.ls25:active, .ls25 a:active {letter-spacing: 0.25em}
 .ti25 {text-indent: 2.5em}
 
 
+/* ***     v vertical-align    *** */
 
-/******************************************/
-/**********     BORDERS    *************/
-/******************************************/
+.vai {vertical-align: initial}
+.vah {vertical-align: inherit}
+.vabl, .vbl {vertical-align: baseline}
+.vasb, .vsb {vertical-align: sub}
+.vasp, .vsp {vertical-align: super}
+.vat, .vt {vertical-align: top}
+.vaxt, .vxt {vertical-align: text-top}
+.vam, .vm {vertical-align: middle}
+.vab, .vb {vertical-align: bottom}
+.vaxb, .vxb {vertical-align: text-bottom}
+
+
+.vl01 {vertical-align: 0.01em}
+.vl02 {vertical-align: 0.02em}
+.vl03 {vertical-align: 0.03em}
+
+
+
+
+
+
+/* ************************************** */
+/* ********     BORDERS       *********** */
+/* ************************************** */
 
 .bi {border: initial}
 .bh {border: inherit}
@@ -1887,7 +2261,7 @@ a.ls25:active, .ls25 a:active {letter-spacing: 0.25em}
 .brh {border-radius: inherit}
 .br, .brn {border-radius: 0}
 
-/****     b__p border in px    ****/
+/* **     b__p border in px    ** */
 
 /* See Color Section for border colors */
 
@@ -1917,7 +2291,7 @@ a.ls25:active, .ls25 a:active {letter-spacing: 0.25em}
 .b24x {border: 24px solid currentColor}
 .b25x {border: 25px solid currentColor}
 
-/****     br__p border radius in px    ****/
+/* **     br__p border radius in px    ** */
 
 .br1x, .br01x {border-radius: 1px}
 .br2x, .br02x {border-radius: 2px}
@@ -1968,7 +2342,7 @@ a.ls25:active, .ls25 a:active {letter-spacing: 0.25em}
 .br47x {border-radius: 47px}
 .br48x {border-radius: 48px}
 
-/****     b border in em    ****/
+/* **     b border in em    ** */
 /* See Color Section for border colors */
 
 .b00 {border: none}
@@ -1998,7 +2372,7 @@ a.ls25:active, .ls25 a:active {letter-spacing: 0.25em}
 .b24 {border: 2.4em solid currentColor}
 .b25 {border: 2.5em solid currentColor}
 
-/****     br border radius in em    ****/
+/* **     br border radius in em    ** */
 
 .br0, .br00 {border-radius: 0}
 .br01 {border-radius: 0.1em}
@@ -2029,11 +2403,11 @@ a.ls25:active, .ls25 a:active {letter-spacing: 0.25em}
 
 
 
-/****************************************************/
-/**********     TEXT and BOX SHADOWS       **********/
-/****************************************************/
+/* ************************************************ */
+/* ********     TEXT and BOX SHADOWS       ******** */
+/* ************************************************ */
 
-/****     ts text shadow    ****/
+/* **     ts text shadow    ** */
 .tsi {text-shadow: initial}
 .tsh {text-shadow: inherit}
 .tsn {text-shadow: none}
@@ -2067,7 +2441,7 @@ a.ls25:active, .ls25 a:active {letter-spacing: 0.25em}
 .ts24 {text-shadow: 0.24em 0.24em 0.2025em #0006}
 .ts25 {text-shadow: 0.25em 0.25em 0.205em #000a}
 
-/****     bs box shadow    ****/
+/* **     bs box shadow    ** */
 
 .bsi {box-shadow: initial}
 .bsh {box-shadow: inherit}
@@ -2102,7 +2476,7 @@ a.ls25:active, .ls25 a:active {letter-spacing: 0.25em}
 .bs24 {box-shadow: 0.24em 0.24em 0.48em #0006}
 .bs25 {box-shadow: 0.25em 0.25em 0.50em #000a}
 
-/****     bsi box shadow inset    ****/
+/* **     bsi box shadow inset    ** */
 /* odd are darker with less transparency */
 
 .bsi01 {box-shadow: inset 0.01em 0.01em 0.02em #000a}
@@ -2144,87 +2518,304 @@ a.ls25:active, .ls25 a:active {letter-spacing: 0.25em}
 .bcc {border-color: currentColor}
 
 /* HTML Named Colors */
-/* First letter of color is upper case to prevent conflicts */
+/* First letter: c = color, bg = background-color, bc = border-color   */
 
-.cBlk, .cBk, .cBlack {color: Black}
-.bgBlk, .bgBk, .bgBlack {background-color: Black}
-.bcBlk, .bcBk, .bcBlack {border-color: Black}
+/* The next letter (first letter of the color) is upper case to prevent conflicts */
 
-.cBrn, .cBn, .cBrown {color: #840}
-.bgBrn, .bgBn, .bgBrown {background-color: #840}
-.bcBrn, .bcBn, .bcBrown {border-color: #840}
 
-.cNvy, .cN, .cNavy {color: Navy}
-.bgNvy, .bgN, .bgNavy {background-color: Navy}
-.bcNvy, .bcN, .bcNavy {border-color: Navy}
+.cBlk,.cB,.cBk,.cBlack{color:Black}
+.bgBlk,.bgBk,.bgBlack{background-color:Black}
+.bcBlk,.bcBk,.bcBlack{border-color:Black}
 
-.cBlu, .cB, .cBlue {color: Blue}
-.bgBlu, .bgB, .bgBlue {background-color: Blue}
-.bcBlu, .bcB, .bcBlue {border-color: Blue}
+.cBrn,.cBr,.cBrown{color:#840}
+.bgBrn,.bgBn,.bgBrown{background-color:#840}
+.bcBrn,.bcBn,.bcBrown{border-color:#840}
 
-.cYlw, .cY, .cYellow {color: Yellow}
-.bgYlw, .bgY, .bgYellow {background-color: Yellow}
-.bcYlw, .bcY, .bcYellow {border-color: Yellow}
+.cNvy,.cN,.cNavy{color:Navy}
+.bgNvy,.bgN,.bgNavy{background-color:Navy}
+.bcNvy,.bcN,.bcNavy{border-color:Navy}
 
-.cRed, .cR, .cRR {color: Red}
-.bgRed, .bgR, .bgRR {background-color: Red}
-.bcRed, .bcR, .bcRR {border-color: Red}
+.cBlu,.cBl,.cBlue{color:Blue}
+.bgBlu,.bgB,.bgBlue{background-color:Blue}
+.bcBlu,.bcB,.bcBlue{border-color:Blue}
 
-.cOrg, .cO, .cOrange {color: #F80}
-.bgOrg, .bgO, .bgOrange {background-color: #F80}
-.bcOrg, .bcO, .bcOrange {border-color: #F80}
+.cYlw,.cY,.cYellow{color:Yellow}
+.bgYlw,.bgY,.bgYellow{background-color:Yellow}
+.bcYlw,.bcY,.bcYellow{border-color:Yellow}
 
-.cTan, .cTn, .cTt {color: #CA0}
-.bgTan, .bgTn, .bgTt {background-color: #CA0}
-.bcTan, .bcTn, .bcTt {border-color: #CA0}
+.cRed,.cR{color:Red}
+.bgRed,.bgR{background-color:Red}
+.bcRed,.bcR{border-color:Red}
 
-.cMrn, .cMn, .cMaroon {color: Maroon}
-.bgMrn, .bgMn, .bgMaroon {background-color: Maroon}
-.bcMrn, .bcMn, .bcMaroon {border-color: Maroon}
+.cOrg,.cO,.cOrange{color:#F80}
+.bgOrg,.bgO,.bgOrange{background-color:#F80}
+.bcOrg,.bcO,.bcOrange{border-color:#F80}
 
-.cPur, .cP, .cPurple {color: Purple}
-.bgPur, .bgP, .bgPurple {background-color: Purple}
-.bcPur, .bcP, .bcPurple {border-color: Purple}
+.cTan,.cTn{color:#CA0}
+.bgTan,.bgTn{background-color:#CA0}
+.bcTan,.bcTn{border-color:#CA0}
 
-.cMag, .cMagenta, .cM, .cFsh, .cF, .cFuchsia {color: Fuchsia}
-.bgMag, .bgMagenta, .bgM, .bgFsh, .bgF, .bgFuchsia {background-color: Fuchsia}
-.bcMag, .bcMagenta, .bcM, .bcFsh, .bcF, .bcFuchsia {border-color: Fuchsia}
+.cMrn,.cMn,.cMaroon{color:Maroon}
+.bgMrn,.bgMn,.bgMaroon{background-color:Maroon}
+.bcMrn,.bcMn,.bcMaroon{border-color:Maroon}
 
-.cOlv, .cOv, .cOlive {color: Olive}
-.bgOlv, .bgOv, .bgOlive {background-color: Olive}
-.bcOlv, .bcOv, .bcOlive {border-color: Olive}
+.cPur,.cP,.cPurple{color:Purple}
+.bgPur,.bgP,.bgPurple{background-color:Purple}
+.bcPur,.bcP,.bcPurple{border-color:Purple}
 
-.cGrn, .cG, .cGreen {color: Green}
-.bgGrn, .bgG, .bgGreen {background-color: Green}
-.bcGrn, .bcG, .bcGreen {border-color: Green}
+.cMag,.cMagenta,.cM,.cFsh,.cF,.cFuchsia{color:Fuchsia}
+.bgMag,.bgMagenta,.bgM,.bgFsh,.bgF,.bgFuchsia{background-color:Fuchsia}
+.bcMag,.bcMagenta,.bcM,.bcFsh,.bcF,.bcFuchsia{border-color:Fuchsia}
 
-.cTea, .cT, .cTeal {color: Teal}
-.bgTea, .bgT, .bgTeal {background-color: Teal}
-.bcTea, .bcT, .bcTeal {border-color: Teal}
+.cOlv,.cOv,.cOlive{color:Olive}
+.bgOlv,.bgOv,.bgOlive{background-color:Olive}
+.bcOlv,.bcOv,.bcOlive{border-color:Olive}
 
-.cLim, .cL, .cLime {color: Lime}
-.bgLim, .bgL, .bgLime {background-color: Lime}
-.bcLim, .bcL, .bcLime {border-color: Lime}
+.cGrn,.cG,.cGreen{color:Green}
+.bgGrn,.bgG,.bgGreen{background-color:Green}
+.bcGrn,.bcG,.bcGreen{border-color:Green}
 
-.cAqu, .cA, .cAqua {color: Aqua}
-.bgAqu, .bgA, .bgAqua {background-color: Aqua}
-.bcAqu, .bcA, .bcAqua {border-color: Aqua}
+.cTea,.cT,.cTeal{color:Teal}
+.bgTea,.bgT,.bgTeal{background-color:Teal}
+.bcTea,.bcT,.bcTeal{border-color:Teal}
 
-.cGry, .cGy, .cGray {color: Gray}
-.bgGry, .bgGy, .bgGray {background-color: Gray}
-.bcGry, .bcGy, .bcGray {border-color: Gray}
+.cLim,.cL,.cLime{color:Lime}
+.bgLim,.bgL,.bgLime{background-color:Lime}
+.bcLim,.bcL,.bcLime{border-color:Lime}
 
-.cSlv, .cS, .cSilver {color: Silver}
-.bgSlv, .bgS, .bgSilver {background-color: Silver}
-.bcSlv, .bcS, .bcSilver {border-color: Silver}
+.cAqu,.cA,.cAqua{color:Aqua}
+.bgAqu,.bgA,.bgAqua{background-color:Aqua}
+.bcAqu,.bcA,.bcAqua{border-color:Aqua}
 
-.cWht, .cW, .cWhite {color: White}
-.bgWht, .bgW, .bgWhite {background-color: White}
-.bcWht, .bcW, .bcWhite {border-color: White}
+.cGry,.cGy,.cGray,.cGrey{color:Gray}
+.bgGry,.bgGy,.bgGray,.bgGrey{background-color:Gray}
+.bcGry,.bcGy,.bcGray,.bcGrey{border-color:Gray}
+
+.cSlv,.cS,.cSilver{color:Silver}
+.bgSlv,.bgS,.bgSilver{background-color:Silver}
+.bcSlv,.bcS,.bcSilver{border-color:Silver}
+
+.cWht,.cW,.cWhite{color:White}
+.bgWht,.bgW,.bgWhite{background-color:White}
+.bcWht,.bcW,.bcWhite{border-color:White}
+
+
+/* NUMERICAL GREYS */
+
+.cG0{color:#000}
+.cG1{color:#111}
+.cG2{color:#222}
+.cG3{color:#333}
+.cG4{color:#444}
+.cG5{color:#555}
+.cG6{color:#666}
+.cG7{color:#777}
+.cG8{color:#888}
+.cG9{color:#999}
+.cGa{color:#aaa}
+.cGb{color:#bbb}
+.cGc{color:#ccc}
+.cGd{color:#ddd}
+.cGe{color:#eee}
+.cGf{color:#fff}
+
+.bgG0{background-color:#000}
+.bgG1{background-color:#111}
+.bgG2{background-color:#222}
+.bgG3{background-color:#333}
+.bgG4{background-color:#444}
+.bgG5{background-color:#555}
+.bgG6{background-color:#666}
+.bgG7{background-color:#777}
+.bgG8{background-color:#888}
+.bgG9{background-color:#999}
+.bgGa{background-color:#aaa}
+.bgGb{background-color:#bbb}
+.bgGc{background-color:#ccc}
+.bgGd{background-color:#ddd}
+.bgGe{background-color:#eee}
+.bgGf{background-color:#fff}
+
+.bcG0{border-color:#000}
+.bcG1{border-color:#111}
+.bcG2{border-color:#222}
+.bcG3{border-color:#333}
+.bcG4{border-color:#444}
+.bcG5{border-color:#555}
+.bcG6{border-color:#666}
+.bcG7{border-color:#777}
+.bcG8{border-color:#888}
+.bcG9{border-color:#999}
+.bcGa{border-color:#aaa}
+.bcGb{border-color:#bbb}
+.bcGc{border-color:#ccc}
+.bcGd{border-color:#ddd}
+.bcGe{border-color:#eee}
+.bcGf{border-color:#fff}
+
+
+
+/*  deprecated grays  */
+/*  THESE WILL BE REMOVED IN THE FUTURE */
+
+.gr1, .gray1 {color: #111}
+.bggr1, .bggray1 {background-color: #111}
+.bcgr1, .bcgray1 {border-color: #111}
+
+.gr2, .gray2 {color: #222}
+.bggr2, .bggray2 {background-color: #222}
+.bcgr2, .bcgray2 {border-color: #222}
+
+.gr3, .gray3 {color: #333}
+.bggr3, .bggray3 {background-color: #333}
+.bcgr3, .bcgray3 {border-color: #333}
+
+.gr4, .gray4 {color: #444}
+.bggr4, .bggray4 {background-color: #444}
+.bcgr4, .bcgray4 {border-color: #444}
+
+.gr5, .gray5 {color: #555}
+.bggr5, .bggray5 {background-color: #555}
+.bcgr5, .bcgray5 {border-color: #555}
+
+.gr6, .gray6 {color: #666}
+.bggr6, .bggray6 {background-color: #666}
+.bcgr6, .bcgray6 {border-color: #666}
+
+.gr7, .gray7 {color: #777}
+.bggr7, .bggray7 {background-color: #777}
+.bcgr7, .bcgray7 {border-color: #777}
+
+.gr8, .gray8 {color: #888}
+.bggr8, .bggray8 {background-color: #888}
+.bcgr8, .bcgray8 {border-color: #888}
+
+.gr9, .gray9 {color: #999}
+.bggr9, .bggray9 {background-color: #999}
+.bcgr9, .bcgray9 {border-color: #999}
+
+.gra, .graya {color: #aaa}
+.bggra, .bggraya {background-color: #aaa}
+.bcgra, .bcgraya {border-color: #aaa}
+
+.grb, .grayb {color: #bbb}
+.bggrb, .bggrayb {background-color: #bbb}
+.bcgrb, .bcgrayb {border-color: #bbb}
+
+.grc, .grayc {color: #ccc}
+.bggrc, .bggrayc {background-color: #ccc}
+.bcgrc, .bcgrayc {border-color: #ccc}
+
+.grd, .grayd {color: #ddd}
+.bggrd, .bggrayd {background-color: #ddd}
+.bcgrd, .bcgrayd {border-color: #ddd}
+
+.gre, .graye {color: #eee}
+.bggre, .bggraye {background-color: #eee}
+.bcgre, .bcgraye {border-color: #eee}
+/*  end deprecated  */
+
+
+
+
+
+
+
+/* *     Pastel Light BGs for use with text    * */
+
+/* **     All BGs below are suitable for body text
+         with text color: #000; and 18px font    * */
+
+/* **
+LIGHT BACKGROUNDS
+
+First Letter:
+ p: Pastel (very light)
+ l: Light
+ m: Medium 
+ 
+Last Letter is Color:
+R red
+P purple
+L lavender
+B blue
+G green
+T tan
+O orange
+Y yellow
+E beige
+W white
+S silver
+A "Accessible" (experimental low fatigue BG)
+
+REVISED: reduced the #ff channels to #f8 in most cases.
+** */
+
+/* red */
+.pR, .pbgR {background-color: #f8e8e8}
+.lR, .lbgR {background-color: #f8dddd}
+.mR, .mbgR {background-color: #f8cccc}
+
+/* purple */
+.pP, .pbgP {background-color: #f8e8f8}
+.lP, .lbgP {background-color: #f8ddf8}
+.mP, .mbgP {background-color: #f8ccf8}
+
+/* lavender */
+.pL, .pbgL {background-color: #e8e4f8}
+.lL, .lbgL {background-color: #E2daf8}
+.mL, .mbgL {background-color: #cbc8f8}
+
+/* blue */
+.pB, .pbgB {background-color: #e0f0f8}
+.lB, .lbgB {background-color: #daeafa}
+.mB, .mbgB {background-color: #bbdbfb}
+
+/* green */
+.pG, .pbgG {background-color: #e0f8e0}
+.lG, .lbgG {background-color: #c8f8c8}
+.mG, .mbgG {background-color: #a8f8bb}
+
+/* tan */
+.pT, .pbgT {background-color: #f4f0e4}
+.lT, .lbgT {background-color: #f8e8c8}
+.mT, .mbgT {background-color: #f8d8a8}
+
+/* orange */
+.pO, .pbgO {background-color: #f8f0a0}
+.lO, .lbgO {background-color: #f8e080}
+.mO, .mbgO {background-color: #f8b866}
+
+/* yellow */
+.pY, .pbgY {background-color: #f4f4dd}
+.lY, .lbgY {background-color: #f4f4bb}
+.mY, .mbgY {background-color: #f0f088}
+
+/* beige */
+.pE, .pbgE {background-color: #f4f0cc}
+.lE, .lbgE {background-color: #e4e0bb}
+.mE, .mbgE {background-color: #cccaaa}
+
+/* white */
+.pW, .pbgW {background-color: #f1f8f2}
+.lW, .lbgW {background-color: #f2f8fa}
+.mW, .mbgW {background-color: #f4f0f4}
+
+/* silver */
+.pS, .pbgS {background-color: #e8e8e8}
+.lS, .lbgS {background-color: #ddd}
+.mS, .mbgS {background-color: #ccc}
+
+/* Accessible Low Fatigue White */
+.pA, .pbgA {background-color: #e6e2dd}
+.lA, .lbgA {background-color: #e0ddcc}
+.mA, .mbgA {background-color: #ddd8d0}
 
 
 /* LUV LCh MAX Colors */
 /* Maximum saturation LUV LCh colors in 5 degree increments */
+/* "luv" and the LUV hue angle. color =  luv360, border is bcluv360 */
+/* Note: Due to the high saturation, they are not listed for background */
 
 .luv360,
 .luv000 {color: #ff006e}
@@ -2376,76 +2967,82 @@ a.ls25:active, .ls25 a:active {letter-spacing: 0.25em}
 .bcluv350 {border-color: #ff0090}
 .bcluv355 {border-color: #ff0080}
 
-/***     Light BGs for use with text    ***/
 
-/***     All BGs below are suitable for body text
-         with text color: #000; and 18px font    ***/
 
-/***
-LIGHT BACKGROUNDS
 
-First Letter:
- P: Pastel (very light)
- L: Light
- M: Medium 
- 
-Last Letter is Color
-***/
 
-/* red */
-.pbgR {background-color: #FEE}
-.lbgR {background-color: #FDD}
-.mbgR {background-color: #FCC}
 
-/* purple */
-.pbgP {background-color: #FEF}
-.lbgP {background-color: #FDF}
-.mbgP {background-color: #FCF}
+/* ************************************************************************** */
+/* *****   Misc Alignments and clear fix etc.   ***************************** */
+/* ************************************************************************** */
 
-/* lavender */
-.pbgL {background-color: #EEF}
-.lbgL {background-color: #E6DDFF}
-.mbgL {background-color: #D0CAFF}
+.centered {
+  position: relative;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 
-/* blue */
-.pbgB {background-color: #EAF9FF}
-.lbgB {background-color: #DEF}
-.mbgB {background-color: #BDF}
+.left,
+.leftCol {
+  text-align: left;
+  float: left;
+  background-position: left;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 
-/* green */
-.pbgG {background-color: #E4FFE4}
-.lbgG {background-color: #CFC}
-.mbgG {background-color: #AFB}
+.right,
+.rightCol {
+  text-align: left;
+  float: right;
+  background-position: right;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 
-/* tan */
-.pbgT {background-color: #F8F4E8}
-.lbgT {background-color: #FEC}
-.mbgT {background-color: #FDA}
+.leftCol, .rightCol { position: Relative; height: 100%; }
 
-/* orange */
-.pbgO {background-color: #FFF4A0}
-.lbgO {background-color: #FFE080}
-.mbgO {background-color: #FB6}
+.leftText { text-align: left; }
 
-/* yellow */
-.pbgY {background-color: #FFD}
-.lbgY {background-color: #FFB}
-.mbgY {background-color: #FF8}
+.rightText { text-align: right; }
 
-/* beige */
-.pbgE {background-color: #F6F6CC}
-.lbgE {background-color: #E4E4BB}
-.mbgE {background-color: #CCA}
+/* ************************************************************************** */
+/* ************************************************************************** */
+/**
+ * CLEARFIX for modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    contenteditable attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that are clearfixed.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+/* ************************************************************************** */
+/* ************************************************************************** */
 
-/* white */
-.pbgW {background-color: #FFFAF4}
-.lbgW {background-color: #F4FAFF}
-.mbgW {background-color: #F8F4F8}
+.clrf:before, .clear:before, .clearfix:before,
+.clrf:after, .clear:after, .clearfix:after {
+  content: " "; /* 1 */
+  display: table; /* 2 */
+}
 
-/* silver */
-.pbgS {background-color: #EEE}
-.lbgS {background-color: #DDD}
-.mbgS {background-color: #CCC}
+.clrf:after,
+.clear:after,
+.clearfix:after { clear: both; }
+
+/* **   For IE 6/7 only
+        Include this rule to trigger hasLayout and contain floats.
+** */
+.clrf, .clear, .clearfix { *zoom: 1; }
+
+
+/* ************************************************************************** */
+/* **********   END OF TinyTrim™   ****************************************** */
+/* ************************************************************************** */
 
 
 /* Specials */

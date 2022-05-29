@@ -1,4 +1,4 @@
-# TinyTrim v0.0.84 - betafish
+# TinyTrim v0.0.86
 
 <p align="center">
 
@@ -53,14 +53,14 @@ The light backgrounds are for a background for text, including body text. The cl
 
 Thus **pbgB** is the lightest (pastel) of Blue as background-color
 
-![](images/TinyTrimBackgrounds.png)
+![](./images/TinyTrimBackgrounds.png)
 
 
 ### Luv Colors
 
 The Luv colors are useable for text with "luv000" or border-color with "bcluv000" where 000 is the three digit hue, in five degree increments starting at 000 through 360 (which is the same as 000).
 
-![](images/LUVCOLOR.png)
+![](./images/LUVCOLOR.png)
 
 ### HTML Named Colors
 
